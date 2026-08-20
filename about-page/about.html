@@ -1,0 +1,2786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | Microsoft Campus Club</title>
+
+    <meta
+        name="description"
+        content="Learn about the history, activities, memories and people behind Microsoft Campus Club."
+    >
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+            background: #050d1a;
+            color: #e6edf7;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =========================================================
+           GLOBAL BACKGROUND
+        ========================================================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(40, 110, 180, 0.07),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 80% 70%,
+                    rgba(30, 90, 150, 0.05),
+                    transparent 32%
+                );
+
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        .page-grid {
+            position: fixed;
+            inset: 0;
+
+            background-image:
+                linear-gradient(
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.015) 1px,
+                    transparent 1px
+                );
+
+            background-size: 60px 60px;
+
+            mask-image: linear-gradient(
+                to bottom,
+                black,
+                transparent 85%
+            );
+
+            pointer-events: none;
+            z-index: -1;
+        }
+
+
+        /* =========================================================
+           TOP STATUS LINE
+        ========================================================= */
+
+        .status-line {
+            width: 100%;
+            height: 32px;
+
+            border-bottom: 1px solid rgba(150, 180, 210, 0.12);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #6f8ca9;
+
+            font-family: monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+
+            background: #4aa3ff;
+
+            border-radius: 50%;
+
+            margin-right: 8px;
+
+            box-shadow:
+                0 0 8px rgba(74, 163, 255, 0.7);
+        }
+
+
+        /* =========================================================
+           HEADER
+        ========================================================= */
+
+        header {
+            height: 82px;
+
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7vw;
+
+            border-bottom: 1px solid rgba(150, 180, 210, 0.10);
+
+            background: rgba(5, 13, 26, 0.82);
+
+            backdrop-filter: blur(14px);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .brand-logo {
+            width: 43px;
+            height: 43px;
+
+            object-fit: contain;
+
+            border-radius: 7px;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.4px;
+        }
+
+        .brand-subtitle {
+            color: #7894b2;
+
+            font-size: 12px;
+
+            letter-spacing: 1.3px;
+
+            margin-top: 2px;
+        }
+
+        .join-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            color: #dcecff;
+
+            padding: 11px 17px;
+
+            border: 1px solid rgba(110, 170, 225, 0.25);
+
+            background: rgba(20, 45, 70, 0.28);
+
+            transition: 0.3s ease;
+        }
+
+        .join-button:hover {
+            border-color: rgba(100, 175, 240, 0.65);
+
+            background: rgba(25, 65, 100, 0.35);
+
+            transform: translateY(-1px);
+        }
+
+        .join-arrow {
+            color: #68b4ff;
+            transition: 0.3s ease;
+        }
+
+        .join-button:hover .join-arrow {
+            transform: translateX(4px);
+        }
+
+
+        /* =========================================================
+           GLOBAL SECTION
+        ========================================================= */
+
+        section {
+            width: 100%;
+            padding: 130px 7vw;
+            position: relative;
+        }
+
+        .section-label {
+            font-family: monospace;
+
+            font-size: 11px;
+
+            color: #579bd4;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 17px;
+        }
+
+        .section-title {
+            font-size: clamp(38px, 5vw, 72px);
+
+            line-height: 0.98;
+
+            letter-spacing: -3px;
+
+            font-weight: 700;
+
+            color: #eef6ff;
+        }
+
+        .section-title span {
+            color: #6386a7;
+        }
+
+        .section-description {
+            max-width: 650px;
+
+            margin-top: 25px;
+
+            color: #8fa8c2;
+
+            line-height: 1.8;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================================================
+           HISTORY SECTION
+        ========================================================= */
+
+        .story-section {
+            min-height: 850px;
+
+            display: grid;
+
+            grid-template-columns: 1.1fr 0.9fr;
+
+            gap: 90px;
+
+            align-items: center;
+        }
+
+        .story-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .date-marker {
+            margin-top: 55px;
+
+            border-left: 1px solid #3976a8;
+
+            padding-left: 25px;
+        }
+
+        .date-marker .date {
+            font-family: monospace;
+
+            font-size: 16px;
+
+            color: #64b2f5;
+
+            letter-spacing: 2px;
+        }
+
+        .date-marker .date-caption {
+            color: #5f7894;
+
+            font-size: 11px;
+
+            margin-top: 6px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.5px;
+        }
+
+        .history-text {
+            margin-top: 35px;
+
+            max-width: 720px;
+
+            color: #a7b8ca;
+
+            line-height: 1.9;
+
+            font-size: 15px;
+        }
+
+        .history-text strong {
+            color: #e4f1ff;
+        }
+
+
+        /* =========================================================
+           AI VISUAL
+        ========================================================= */
+
+        .ai-visual {
+            position: relative;
+
+            min-height: 520px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+        .ai-orbit {
+            position: absolute;
+
+            width: 440px;
+            height: 440px;
+
+            border: 1px solid rgba(80, 160, 220, 0.15);
+
+            border-radius: 50%;
+
+            transform: rotate(-20deg);
+        }
+
+        .ai-orbit::before {
+            content: "";
+
+            position: absolute;
+
+            inset: 45px;
+
+            border: 1px solid rgba(80, 160, 220, 0.08);
+
+            border-radius: 50%;
+        }
+
+        .ai-card {
+            width: 410px;
+            height: 480px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border: 1px solid rgba(115, 165, 210, 0.22);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(19, 43, 66, 0.82),
+                    rgba(6, 16, 29, 0.94)
+                );
+
+            box-shadow:
+                0 30px 90px rgba(0,0,0,0.35);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+        /*
+           This visual acts as the AI collaboration artwork.
+           Replace this entire inner visual with an AI-generated
+           image if desired.
+        */
+
+        .ai-art {
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    rgba(64, 158, 235, 0.25),
+                    transparent 22%
+                ),
+                radial-gradient(
+                    circle at 25% 65%,
+                    rgba(48, 111, 176, 0.17),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 75% 70%,
+                    rgba(70, 130, 190, 0.15),
+                    transparent 25%
+                );
+        }
+
+        .person {
+            position: absolute;
+
+            width: 80px;
+            height: 80px;
+
+            border: 1px solid rgba(120, 190, 240, 0.4);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 50% 35%,
+                    #9bb9cf 0 11%,
+                    transparent 12%
+                ),
+                radial-gradient(
+                    ellipse at 50% 82%,
+                    #5e89a8 0 29%,
+                    transparent 30%
+                );
+
+            box-shadow:
+                0 0 30px rgba(70, 160, 230, 0.13);
+        }
+
+        .person:nth-child(1) {
+            top: 100px;
+            left: 65px;
+        }
+
+        .person:nth-child(2) {
+            top: 80px;
+            right: 55px;
+        }
+
+        .person:nth-child(3) {
+            bottom: 85px;
+            left: 85px;
+        }
+
+        .person:nth-child(4) {
+            bottom: 65px;
+            right: 85px;
+        }
+
+        .central-node {
+            position: absolute;
+
+            width: 110px;
+            height: 110px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(100, 185, 240, 0.6);
+
+            background: rgba(19, 52, 80, 0.65);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #86caff;
+
+            font-family: monospace;
+
+            font-size: 10px;
+
+            letter-spacing: 1px;
+
+            box-shadow:
+                0 0 45px rgba(50, 150, 230, 0.14);
+        }
+
+        .connection {
+            position: absolute;
+
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(90, 180, 240, 0.45),
+                    transparent
+                );
+
+            transform-origin: left center;
+        }
+
+        .line-1 {
+            width: 145px;
+            left: 110px;
+            top: 180px;
+            transform: rotate(24deg);
+        }
+
+        .line-2 {
+            width: 140px;
+            right: 105px;
+            top: 175px;
+            transform: rotate(155deg);
+        }
+
+        .line-3 {
+            width: 145px;
+            left: 120px;
+            bottom: 175px;
+            transform: rotate(-25deg);
+        }
+
+        .line-4 {
+            width: 145px;
+            right: 105px;
+            bottom: 160px;
+            transform: rotate(-155deg);
+        }
+
+        .ai-caption {
+            position: absolute;
+
+            left: 24px;
+            bottom: 22px;
+
+            font-family: monospace;
+
+            font-size: 10px;
+
+            color: #60809e;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+        }
+
+
+        /* =========================================================
+           WHAT WE DO
+        ========================================================= */
+
+        .what-we-do {
+            margin-top: 95px;
+
+            padding-top: 70px;
+
+            border-top: 1px solid rgba(130, 160, 190, 0.12);
+        }
+
+        .activities-grid {
+            margin-top: 45px;
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            border-top: 1px solid rgba(130, 160, 190, 0.12);
+
+            border-left: 1px solid rgba(130, 160, 190, 0.12);
+        }
+
+        .activity {
+            min-height: 160px;
+
+            padding: 27px;
+
+            border-right: 1px solid rgba(130, 160, 190, 0.12);
+
+            border-bottom: 1px solid rgba(130, 160, 190, 0.12);
+
+            transition: 0.35s ease;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .activity::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            bottom: 0;
+
+            width: 0;
+            height: 2px;
+
+            background: #4b9ddd;
+
+            transition: 0.35s ease;
+        }
+
+        .activity:hover {
+            background: rgba(35, 76, 110, 0.09);
+        }
+
+        .activity:hover::after {
+            width: 100%;
+        }
+
+        .activity-number {
+            font-family: monospace;
+
+            font-size: 10px;
+
+            color: #4f83ad;
+
+            letter-spacing: 1px;
+        }
+
+        .activity h3 {
+            margin-top: 22px;
+
+            font-size: 17px;
+
+            color: #dce9f7;
+        }
+
+        .activity p {
+            margin-top: 9px;
+
+            color: #718ba5;
+
+            line-height: 1.6;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           TECHNICAL GAMES LINK
+        ========================================================= */
+
+        .games-link {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-top: 45px;
+
+            color: #78baf0;
+
+            font-family: monospace;
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+
+            border-bottom: 1px solid rgba(90, 160, 220, 0.35);
+
+            padding-bottom: 8px;
+
+            transition: 0.3s ease;
+        }
+
+        .games-link:hover {
+            color: #b9ddfa;
+
+            gap: 18px;
+
+            border-color: #66aee3;
+        }
+
+
+        /* =========================================================
+           MEMORIES
+        ========================================================= */
+
+        .memories-section {
+            min-height: 900px;
+
+            border-top: 1px solid rgba(130, 160, 190, 0.10);
+        }
+
+        .memories-header {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: end;
+        }
+
+        .memory-counter {
+            font-family: monospace;
+
+            color: #587895;
+
+            font-size: 12px;
+
+            letter-spacing: 2px;
+        }
+
+        .memory-stage {
+            margin-top: 85px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 100px;
+
+            align-items: center;
+
+            min-height: 560px;
+        }
+
+        .photo-deck {
+            height: 520px;
+
+            position: relative;
+
+            perspective: 1200px;
+        }
+
+        .memory-photo {
+            position: absolute;
+
+            width: 430px;
+            height: 470px;
+
+            top: 25px;
+            left: 50%;
+
+            transform-origin: center center;
+
+            transform: translateX(-50%);
+
+            object-fit: cover;
+
+            border: 1px solid rgba(180, 210, 235, 0.2);
+
+            box-shadow:
+                0 35px 70px rgba(0,0,0,0.38);
+
+            transition:
+                transform 0.75s cubic-bezier(.2,.8,.2,1),
+                opacity 0.5s ease,
+                filter 0.5s ease;
+
+            background: #0b1725;
+        }
+
+        .memory-photo:nth-child(4) {
+            transform:
+                translateX(-50%)
+                translateY(-18px)
+                rotate(-5deg)
+                scale(0.90);
+
+            opacity: 0.25;
+
+            z-index: 1;
+
+            filter: brightness(0.55);
+        }
+
+        .memory-photo:nth-child(3) {
+            transform:
+                translateX(-50%)
+                translateY(-10px)
+                rotate(4deg)
+                scale(0.93);
+
+            opacity: 0.42;
+
+            z-index: 2;
+
+            filter: brightness(0.62);
+        }
+
+        .memory-photo:nth-child(2) {
+            transform:
+                translateX(-50%)
+                translateY(-5px)
+                rotate(-2deg)
+                scale(0.96);
+
+            opacity: 0.65;
+
+            z-index: 3;
+
+            filter: brightness(0.72);
+        }
+
+        .memory-photo:nth-child(1) {
+            transform:
+                translateX(-50%)
+                rotate(0deg)
+                scale(1);
+
+            opacity: 1;
+
+            z-index: 4;
+
+            filter: brightness(0.92);
+        }
+
+        .memory-photo.exit {
+            transform:
+                translateX(40%)
+                translateY(-25px)
+                rotate(10deg)
+                scale(1.03);
+
+            opacity: 0;
+
+            z-index: 10;
+        }
+
+        .memory-content {
+            max-width: 560px;
+
+            min-height: 360px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+        .memory-number {
+            font-family: monospace;
+
+            color: #579bd4;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            margin-bottom: 25px;
+        }
+
+        .memory-content h3 {
+            font-size: clamp(34px, 4vw, 55px);
+
+            letter-spacing: -2px;
+
+            line-height: 1;
+
+            color: #edf6ff;
+        }
+
+        .memory-content p {
+            margin-top: 28px;
+
+            color: #8da5bd;
+
+            line-height: 1.9;
+
+            font-size: 15px;
+
+            max-width: 510px;
+        }
+
+        .memory-controls {
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-top: 42px;
+        }
+
+        .memory-next {
+            width: 56px;
+            height: 56px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(100, 165, 215, 0.35);
+
+            background: rgba(15, 35, 55, 0.4);
+
+            color: #9bcaf0;
+
+            cursor: pointer;
+
+            font-size: 21px;
+
+            transition: 0.3s ease;
+        }
+
+        .memory-next:hover {
+            border-color: #69b3ef;
+
+            background: rgba(40, 90, 130, 0.3);
+
+            transform: translateX(4px);
+        }
+
+        .memory-progress {
+            display: flex;
+
+            gap: 7px;
+        }
+
+        .progress-dot {
+            width: 5px;
+            height: 5px;
+
+            background: #304a61;
+
+            border-radius: 50%;
+
+            transition: 0.3s ease;
+        }
+
+        .progress-dot.active {
+            width: 25px;
+
+            border-radius: 4px;
+
+            background: #5ca8df;
+        }
+
+
+        /* =========================================================
+           OFFICE BEARERS
+        ========================================================= */
+
+        .people-section {
+            border-top: 1px solid rgba(130, 160, 190, 0.10);
+        }
+
+        .mentor-grid {
+            margin-top: 70px;
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 16px;
+        }
+
+        .mentor-card {
+            border: 1px solid rgba(120, 155, 185, 0.15);
+
+            background: rgba(10, 23, 38, 0.45);
+
+            transition: 0.35s ease;
+        }
+
+        .mentor-card:hover {
+            border-color: rgba(90, 165, 220, 0.4);
+
+            transform: translateY(-5px);
+        }
+
+        .mentor-image {
+            width: 100%;
+            height: 330px;
+
+            object-fit: cover;
+
+            filter: grayscale(12%) brightness(0.88);
+
+            display: block;
+        }
+
+        .mentor-info {
+            padding: 23px;
+        }
+
+        .mentor-role {
+            color: #579bd4;
+
+            font-family: monospace;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+        }
+
+        .mentor-name {
+            margin-top: 11px;
+
+            color: #dce9f6;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+        .student-leadership {
+            margin-top: 110px;
+        }
+
+        .sub-heading {
+            color: #6e8da9;
+
+            font-family: monospace;
+
+            font-size: 11px;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 28px;
+        }
+
+        .leadership-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            border-top: 1px solid rgba(130, 160, 190, 0.12);
+
+            border-left: 1px solid rgba(130, 160, 190, 0.12);
+        }
+
+        .leader {
+            padding: 30px;
+
+            min-height: 140px;
+
+            border-right: 1px solid rgba(130, 160, 190, 0.12);
+
+            border-bottom: 1px solid rgba(130, 160, 190, 0.12);
+
+            transition: 0.3s ease;
+        }
+
+        .leader:hover {
+            background: rgba(35, 75, 110, 0.08);
+        }
+
+        .leader-role {
+            font-family: monospace;
+
+            color: #579bd4;
+
+            font-size: 10px;
+
+            letter-spacing: 1.5px;
+        }
+
+        .leader-name {
+            margin-top: 17px;
+
+            color: #dfeaf5;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+        .leader-course {
+            margin-top: 6px;
+
+            color: #617b96;
+
+            font-family: monospace;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================================================
+           TEAM SECTIONS
+        ========================================================= */
+
+        .teams-grid {
+            margin-top: 70px;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+        }
+
+        .team-box {
+            border: 1px solid rgba(120, 155, 185, 0.14);
+
+            padding: 32px;
+
+            background: rgba(10, 23, 38, 0.35);
+        }
+
+        .team-title {
+            color: #dfeefa;
+
+            font-size: 18px;
+        }
+
+        .team-head {
+            margin-top: 20px;
+
+            color: #8ca9c2;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        .team-head strong {
+            color: #64afe5;
+        }
+
+        .team-members {
+            margin-top: 22px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 10px;
+        }
+
+        .team-member {
+            padding-top: 10px;
+
+            border-top: 1px solid rgba(130, 160, 190, 0.08);
+
+            color: #829bb3;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           OFFICE BEARERS LIST
+        ========================================================= */
+
+        .office-list-section {
+            margin-top: 100px;
+        }
+
+        .office-list {
+            border-top: 1px solid rgba(130, 160, 190, 0.14);
+
+            margin-top: 30px;
+        }
+
+        .office-row {
+            display: grid;
+
+            grid-template-columns: 1fr 130px;
+
+            padding: 18px 10px;
+
+            border-bottom: 1px solid rgba(130, 160, 190, 0.10);
+
+            transition: 0.3s ease;
+        }
+
+        .office-row:hover {
+            padding-left: 20px;
+
+            background: rgba(35, 75, 110, 0.08);
+        }
+
+        .office-name {
+            color: #c8d9e8;
+
+            font-size: 13px;
+        }
+
+        .office-year {
+            color: #55718d;
+
+            font-family: monospace;
+
+            font-size: 11px;
+
+            text-align: right;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            margin-top: 100px;
+
+            border-top: 1px solid rgba(150, 180, 210, 0.12);
+
+            padding: 75px 7vw 42px;
+
+            background: #050d1a;
+        }
+
+        .footer-main {
+            display: grid;
+
+            grid-template-columns: 1.6fr 1fr 1fr;
+
+            gap: 80px;
+        }
+
+        .footer-brand {
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .footer-brand-top {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .footer-logo {
+            width: 48px;
+            height: 48px;
+
+            object-fit: contain;
+        }
+
+        .footer-brand-name {
+            font-size: 21px;
+
+            font-weight: 700;
+        }
+
+        .footer-brand-subtitle {
+            margin-top: 4px;
+
+            color: #7290ae;
+
+            font-size: 12px;
+
+            letter-spacing: 1.2px;
+        }
+
+        .footer-description {
+            max-width: 490px;
+
+            margin-top: 25px;
+
+            color: #a0b4c9;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+        .footer-column h4 {
+            color: #eef5fc;
+
+            font-size: 13px;
+
+            margin-bottom: 18px;
+        }
+
+        .footer-column a {
+            display: block;
+
+            color: #c3d1df;
+
+            font-size: 14px;
+
+            margin-bottom: 14px;
+
+            transition: 0.25s ease;
+        }
+
+        .footer-column a:hover {
+            color: #6bb4ed;
+
+            transform: translateX(3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(130, 160, 190, 0.12);
+
+            margin-top: 60px;
+
+            padding-top: 40px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            color: #7090ad;
+
+            font-family: monospace;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================================================
+           REVEAL ANIMATION
+        ========================================================= */
+
+        .reveal {
+            opacity: 0;
+
+            transform: translateY(25px);
+
+            transition:
+                opacity 0.8s ease,
+                transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 1100px) {
+
+            .story-section {
+                grid-template-columns: 1fr;
+
+                gap: 40px;
+            }
+
+            .ai-visual {
+                min-height: 580px;
+            }
+
+            .activities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .memory-stage {
+                grid-template-columns: 1fr;
+
+                gap: 50px;
+            }
+
+            .memory-content {
+                margin: auto;
+
+                width: 100%;
+            }
+
+            .mentor-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .leadership-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 0 5vw;
+
+                height: 72px;
+            }
+
+            .brand-logo {
+                width: 37px;
+                height: 37px;
+            }
+
+            .brand-name {
+                font-size: 17px;
+            }
+
+            .brand-subtitle {
+                font-size: 9px;
+            }
+
+            .join-button {
+                padding: 9px 11px;
+
+                font-size: 11px;
+            }
+
+            section {
+                padding: 90px 5vw;
+            }
+
+            .section-title {
+                letter-spacing: -2px;
+            }
+
+            .ai-card {
+                width: min(100%, 380px);
+
+                height: 450px;
+            }
+
+            .ai-orbit {
+                width: 350px;
+                height: 350px;
+            }
+
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .memory-photo {
+                width: 310px;
+                height: 390px;
+            }
+
+            .photo-deck {
+                height: 450px;
+            }
+
+            .memory-stage {
+                margin-top: 50px;
+            }
+
+            .mentor-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .teams-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .footer-brand {
+                grid-column: auto;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            .footer-bottom span:last-child {
+                text-align: left;
+            }
+
+            .office-row {
+                grid-template-columns: 1fr 80px;
+            }
+        }
+
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+
+                transition: none !important;
+
+                animation: none !important;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="page-grid"></div>
+
+
+<!-- =============================================================
+     STATUS
+============================================================= -->
+
+<div class="status-line">
+    <span class="status-dot"></span>
+    MCC DIGITAL PLATFORM :: ABOUT US
+</div>
+
+
+<!-- =============================================================
+     HEADER
+============================================================= -->
+
+<header>
+
+    <a href="index.html" class="brand">
+
+        <img
+            src="mcc-logo.png"
+            alt="Microsoft Campus Club Logo"
+            class="brand-logo"
+        >
+
+        <div class="brand-text">
+
+            <div class="brand-name">
+                MCC
+            </div>
+
+            <div class="brand-subtitle">
+                MICROSOFT CAMPUS CLUB
+            </div>
+
+        </div>
+
+    </a>
+
+
+    <a href="index.html" class="join-button">
+
+        JOIN US
+
+        <span class="join-arrow">
+            →
+        </span>
+
+    </a>
+
+</header>
+
+
+<!-- =============================================================
+     SECTION 01 — HISTORY + WHAT WE DO
+============================================================= -->
+
+<section class="story-section">
+
+
+    <div class="story-content reveal">
+
+        <div class="section-label">
+            01 / OUR STORY
+        </div>
+
+        <h1 class="section-title">
+            The story<br>
+            <span>behind MCC.</span>
+        </h1>
+
+
+        <div class="date-marker">
+
+            <div class="date">
+                18 MARCH 2008
+            </div>
+
+            <div class="date-caption">
+                Where the journey began
+            </div>
+
+        </div>
+
+
+        <div class="history-text">
+
+            The <strong>Microsoft Student Partners (MSP)</strong>
+            program encouraged students who were passionate about
+            technology, eager to share their knowledge, and ready to
+            develop skills beyond their classroom learning.
+
+            <br><br>
+
+            As part of the Microsoft Student Partner Program,
+            Microsoft Student Partners from individual colleges
+            established and ran Microsoft Campus Clubs within
+            their respective institutions.
+
+            <br><br>
+
+            The <strong>Microsoft Campus Club</strong> was started
+            on <strong>18 March 2008</strong> to facilitate education
+            and knowledge exchange among students interested in
+            Microsoft technologies.
+
+            <br><br>
+
+            MCC provides a space where students can learn about
+            technology, connect with peers, exchange ideas, and
+            build a community around shared interests.
+
+            Microsoft Campus Clubs are supported by Microsoft.
+
+        </div>
+
+
+        <!-- WHAT WE DO -->
+
+        <div class="what-we-do">
+
+            <div class="section-label">
+                WHAT WE DO
+            </div>
+
+            <h2 class="section-title" style="font-size:42px;">
+                Build. Explore.<br>
+                <span>Grow together.</span>
+            </h2>
+
+
+            <div class="activities-grid">
+
+                <div class="activity">
+                    <div class="activity-number">01</div>
+
+                    <h3>Weekly Events</h3>
+
+                    <p>
+                        Regular sessions that bring students
+                        together to learn, share and connect.
+                    </p>
+                </div>
+
+
+                <div class="activity">
+                    <div class="activity-number">02</div>
+
+                    <h3>Hackathons</h3>
+
+                    <p>
+                        Turning ideas into prototypes,
+                        solutions and real experiences.
+                    </p>
+                </div>
+
+
+                <div class="activity">
+                    <div class="activity-number">03</div>
+
+                    <h3>Placement Prep</h3>
+
+                    <p>
+                        Mock tests and preparation activities
+                        to help students become career ready.
+                    </p>
+                </div>
+
+
+                <div class="activity">
+                    <div class="activity-number">04</div>
+
+                    <h3>Weekly Quizzes</h3>
+
+                    <p>
+                        Challenging technical knowledge through
+                        regular quizzes and competitions.
+                    </p>
+                </div>
+
+
+                <div class="activity">
+                    <div class="activity-number">05</div>
+
+                    <h3>Innovation</h3>
+
+                    <p>
+                        Encouraging students to think differently
+                        and turn ideas into possibilities.
+                    </p>
+                </div>
+
+
+                <div class="activity">
+                    <div class="activity-number">06</div>
+
+                    <h3>Tech Games</h3>
+
+                    <p>
+                        Making technology interactive,
+                        competitive and fun.
+                    </p>
+                </div>
+
+
+                <div class="activity">
+                    <div class="activity-number">07</div>
+
+                    <h3>Young Minds</h3>
+
+                    <p>
+                        Building confidence, curiosity and
+                        leadership among future creators.
+                    </p>
+                </div>
+
+
+                <div class="activity">
+                    <div class="activity-number">08</div>
+
+                    <h3>Community</h3>
+
+                    <p>
+                        Connecting students through technology,
+                        collaboration and shared experiences.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <a
+                href="technical-games.html"
+                class="games-link"
+            >
+                EXPLORE TECHNICAL GAMES
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- AI VISUAL -->
+
+    <div class="ai-visual reveal">
+
+        <div class="ai-orbit"></div>
+
+        <div class="ai-card">
+
+            <div class="ai-art"></div>
+
+            <div class="connection line-1"></div>
+            <div class="connection line-2"></div>
+            <div class="connection line-3"></div>
+            <div class="connection line-4"></div>
+
+            <div class="person"></div>
+            <div class="person"></div>
+            <div class="person"></div>
+            <div class="person"></div>
+
+            <div class="central-node">
+                COLLABORATE
+            </div>
+
+            <div class="ai-caption">
+                PEOPLE × IDEAS × TECHNOLOGY
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =============================================================
+     SECTION 02 — MEMORIES
+============================================================= -->
+
+<section class="memories-section">
+
+    <div class="memories-header reveal">
+
+        <div>
+
+            <div class="section-label">
+                02 / MEMORIES
+            </div>
+
+            <h2 class="section-title">
+                Moments that<br>
+                <span>stay with us.</span>
+            </h2>
+
+        </div>
+
+        <div class="memory-counter">
+            <span id="counterCurrent">01</span>
+            /
+            04
+        </div>
+
+    </div>
+
+
+    <div class="memory-stage">
+
+
+        <!-- PHOTO DECK -->
+
+        <div class="photo-deck reveal">
+
+            <img
+                src="memory4.jpg"
+                class="memory-photo"
+                alt="MCC memory 4"
+            >
+
+            <img
+                src="memory3.jpg"
+                class="memory-photo"
+                alt="MCC memory 3"
+            >
+
+            <img
+                src="memory2.jpg"
+                class="memory-photo"
+                alt="MCC memory 2"
+            >
+
+            <img
+                src="memory1.jpg"
+                class="memory-photo"
+                alt="MCC memory 1"
+            >
+
+        </div>
+
+
+        <!-- MEMORY CONTENT -->
+
+        <div class="memory-content reveal">
+
+            <div
+                class="memory-number"
+                id="memoryNumber"
+            >
+                MEMORY 01
+            </div>
+
+
+            <h3 id="memoryTitle">
+                Innovation Meets Applied AI
+            </h3>
+
+
+            <p id="memoryDescription">
+
+                MCC, in collaboration with the Computer Society
+                of India, hosted an orientation session featuring
+                a guest speaker who shared insights into innovation
+                and the growing possibilities of Applied AI.
+
+                <br><br>
+
+                It brought students together to explore emerging
+                technologies, exchange ideas and look beyond the
+                boundaries of the classroom.
+
+            </p>
+
+
+            <div class="memory-controls">
+
+                <button
+                    class="memory-next"
+                    id="nextMemory"
+                    aria-label="Next memory"
+                >
+                    →
+                </button>
+
+
+                <div class="memory-progress">
+
+                    <span class="progress-dot active"></span>
+                    <span class="progress-dot"></span>
+                    <span class="progress-dot"></span>
+                    <span class="progress-dot"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =============================================================
+     SECTION 03 — PEOPLE
+============================================================= -->
+
+<section class="people-section">
+
+    <div class="reveal">
+
+        <div class="section-label">
+            03 / PEOPLE
+        </div>
+
+        <h2 class="section-title">
+            The people<br>
+            <span>behind MCC.</span>
+        </h2>
+
+        <p class="section-description">
+            The mentors, leaders and student teams who contribute
+            their time, ideas and energy to the MCC community.
+        </p>
+
+    </div>
+
+
+    <!-- MENTORS -->
+
+    <div class="mentor-grid reveal">
+
+
+        <div class="mentor-card">
+
+            <img
+                src="principal.jpg"
+                class="mentor-image"
+                alt="Dr. S Arivazhagan"
+            >
+
+            <div class="mentor-info">
+
+                <div class="mentor-role">
+                    Patron
+                </div>
+
+                <div class="mentor-name">
+                    DR. S ARIVAZHAGAN, M.E., PH.D.<br>
+                    PRINCIPAL
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="mentor-card">
+
+            <img
+                src="HOD.jpg"
+                class="mentor-image"
+                alt="Dr. T Revathi"
+            >
+
+            <div class="mentor-info">
+
+                <div class="mentor-role">
+                    President
+                </div>
+
+                <div class="mentor-name">
+                    DR. T REVATHI, M.E., PH.D.<br>
+                    HEAD IT
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="mentor-card">
+
+            <img
+                src="venitta.jpg"
+                class="mentor-image"
+                alt="Dr. R Venitta Raj"
+            >
+
+            <div class="mentor-info">
+
+                <div class="mentor-role">
+                    Faculty Advisor
+                </div>
+
+                <div class="mentor-name">
+                    DR. R VENITTA RAJ, M.E., PH.D.<br>
+                    ASSOCIATE PROFESSOR
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="mentor-card">
+
+            <img
+                src="abirami.jpg"
+                class="mentor-image"
+                alt="Mrs. K Abirami"
+            >
+
+            <div class="mentor-info">
+
+                <div class="mentor-role">
+                    Faculty Advisor
+                </div>
+
+                <div class="mentor-name">
+                    MRS. K ABIRAMI, M.E. (PHD)<br>
+                    ASSISTANT PROFESSOR
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CORE LEADERSHIP -->
+
+    <div class="student-leadership reveal">
+
+        <div class="sub-heading">
+            Student Leadership
+        </div>
+
+
+        <div class="leadership-grid">
+
+
+            <div class="leader">
+
+                <div class="leader-role">
+                    Chairperson
+                </div>
+
+                <div class="leader-name">
+                    Mr. Ragavardaan V
+                </div>
+
+                <div class="leader-course">
+                    IV CSE
+                </div>
+
+            </div>
+
+
+            <div class="leader">
+
+                <div class="leader-role">
+                    Co-Chairperson
+                </div>
+
+                <div class="leader-name">
+                    Mr. Jeya Krishnan S
+                </div>
+
+                <div class="leader-course">
+                    IV CSE
+                </div>
+
+            </div>
+
+
+            <div class="leader">
+
+                <div class="leader-role">
+                    Secretary
+                </div>
+
+                <div class="leader-name">
+                    Ms. Varshini T N
+                </div>
+
+                <div class="leader-course">
+                    IV AI&DS
+                </div>
+
+            </div>
+
+
+            <div class="leader">
+
+                <div class="leader-role">
+                    Joint Secretary
+                </div>
+
+                <div class="leader-name">
+                    Mr. Haris S
+                </div>
+
+                <div class="leader-course">
+                    IV CSE
+                </div>
+
+            </div>
+
+
+            <div class="leader">
+
+                <div class="leader-role">
+                    Joint Secretary
+                </div>
+
+                <div class="leader-name">
+                    Mr. Abishek Thayabaran M
+                </div>
+
+                <div class="leader-course">
+                    III AI&DS
+                </div>
+
+            </div>
+
+
+            <div class="leader">
+
+                <div class="leader-role">
+                    Treasurer
+                </div>
+
+                <div class="leader-name">
+                    Ms. Harshini Rithika E
+                </div>
+
+                <div class="leader-course">
+                    III ECE
+                </div>
+
+            </div>
+
+
+            <div class="leader">
+
+                <div class="leader-role">
+                    Treasurer
+                </div>
+
+                <div class="leader-name">
+                    Mr. Abhash Kumar F
+                </div>
+
+                <div class="leader-course">
+                    III AI&DS
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TEAMS -->
+
+    <div class="teams-grid reveal">
+
+
+        <div class="team-box">
+
+            <div class="team-title">
+                Software Team
+            </div>
+
+            <div class="team-head">
+
+                <strong>Head:</strong>
+                Mr. Poobalan S M — IV ECE
+
+            </div>
+
+
+            <div class="team-members">
+
+                <div class="team-member">
+                    Mr. Ruthra Kumar S — III CSE
+                </div>
+
+                <div class="team-member">
+                    Ms. Sangavi S — III IT
+                </div>
+
+                <div class="team-member">
+                    Ms. Veeralakshmi T — III IT
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="team-box">
+
+            <div class="team-title">
+                Event Team
+            </div>
+
+            <div class="team-head">
+
+                <strong>Head:</strong>
+                Ms. Karthika S — IV AI&DS
+
+            </div>
+
+
+            <div class="team-members">
+
+                <div class="team-member">
+                    Ms. Amurtha — IV AI&DS
+                </div>
+
+                <div class="team-member">
+                    Ms. Harini S — III CSE
+                </div>
+
+                <div class="team-member">
+                    Ms. Boomija B — III CSE
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- OFFICE BEARERS -->
+
+    <div class="office-list-section reveal">
+
+        <div class="sub-heading">
+            Office Bearers
+        </div>
+
+
+        <div class="office-list">
+
+            <div class="office-row">
+                <span class="office-name">
+                    S. Jegadheesan
+                </span>
+                <span class="office-year">
+                    II CSE
+                </span>
+            </div>
+
+            <div class="office-row">
+                <span class="office-name">
+                    V. Janarthanan
+                </span>
+                <span class="office-year">
+                    II CSE
+                </span>
+            </div>
+
+            <div class="office-row">
+                <span class="office-name">
+                    S. Mohana Prasath
+                </span>
+                <span class="office-year">
+                    II CSE
+                </span>
+            </div>
+
+            <div class="office-row">
+                <span class="office-name">
+                    K. Mithra Devi
+                </span>
+                <span class="office-year">
+                    II AI&DS
+                </span>
+            </div>
+
+            <div class="office-row">
+                <span class="office-name">
+                    VJ. Vaishhnaave
+                </span>
+                <span class="office-year">
+                    II AI&DS
+                </span>
+            </div>
+
+            <div class="office-row">
+                <span class="office-name">
+                    C. Mohana Priya
+                </span>
+                <span class="office-year">
+                    II CSE
+                </span>
+            </div>
+
+            <div class="office-row">
+                <span class="office-name">
+                    R. Brindha
+                </span>
+                <span class="office-year">
+                    II CSE
+                </span>
+            </div>
+
+            <div class="office-row">
+                <span class="office-name">
+                    G. Gopisaroja
+                </span>
+                <span class="office-year">
+                    II CSE
+                </span>
+            </div>
+
+            <div class="office-row">
+                <span class="office-name">
+                    Nandhitha K. V
+                </span>
+                <span class="office-year">
+                    II IT
+                </span>
+            </div>
+
+            <div class="office-row">
+                <span class="office-name">
+                    Aasima Banu M
+                </span>
+                <span class="office-year">
+                    II IT
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =============================================================
+     FOOTER
+============================================================= -->
+
+<footer>
+
+    <div class="footer-main">
+
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+            <div class="footer-brand-top">
+
+                <img
+                    src="mcc-logo.png"
+                    alt="MCC Logo"
+                    class="footer-logo"
+                >
+
+                <div>
+
+                    <div class="footer-brand-name">
+                        MCC
+                    </div>
+
+                    <div class="footer-brand-subtitle">
+                        MICROSOFT CAMPUS CLUB
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-description">
+
+                The official centralized digital platform for the
+                Microsoft Campus Club community. Uniting students,
+                technical initiatives, activities, and resources.
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="footer-column">
+
+            <h4>
+                NAVIGATION
+            </h4>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="#">
+                Students Corner
+            </a>
+
+            <a href="#">
+                Announcements
+            </a>
+
+        </div>
+
+
+        <!-- ROLE PORTALS -->
+
+        <div class="footer-column">
+
+            <h4>
+                ROLE PORTALS
+            </h4>
+
+            <a href="#">
+                Office Bearer Login
+            </a>
+
+            <a href="#">
+                Admin Login
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 Microsoft Campus Club. All rights reserved.
+        </span>
+
+        <span>
+            MCC Digital Platform — Authentication Gateway
+        </span>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =============================================================
+     JAVASCRIPT
+============================================================= -->
+
+<script>
+
+    /* =========================================================
+       MEMORY DATA
+    ========================================================= */
+
+    const memories = [
+
+        {
+            title: "Innovation Meets Applied AI",
+
+            description:
+                `MCC, in collaboration with the Computer Society of India,
+                hosted an orientation session featuring a guest speaker
+                who shared insights into innovation and the growing
+                possibilities of Applied AI.<br><br>
+                It brought students together to explore emerging
+                technologies, exchange ideas and look beyond the
+                boundaries of the classroom.`
+        },
+
+        {
+            title: "A Room Full of Curiosity",
+
+            description:
+                `The session brought together a large community of
+                students, creating an environment filled with curiosity,
+                questions and shared enthusiasm for technology.<br><br>
+                Every seat represented another mind ready to learn,
+                explore and connect.`
+        },
+
+        {
+            title: "Stories That Stay",
+
+            description:
+                `During the valedictory event, our former Co-Chairperson
+                shared experiences and memories from their journey with
+                MCC.<br><br>
+                It was more than a farewell — it was a reflection on the
+                experiences, friendships, challenges and growth that
+                shaped their time with the club.`
+        },
+
+        {
+            title: "One Club. Many Journeys.",
+
+            description:
+                `The valedictory brought together the Office Bearers of
+                MCC — a group united by a shared passion for technology,
+                collaboration and creating meaningful experiences for
+                fellow students.<br><br>
+                Different people. Different journeys. <strong>One MCC.</strong>`
+        }
+
+    ];
+
+
+    let currentMemory = 0;
+
+
+    const photos =
+        document.querySelectorAll(".memory-photo");
+
+    const nextButton =
+        document.getElementById("nextMemory");
+
+    const memoryTitle =
+        document.getElementById("memoryTitle");
+
+    const memoryDescription =
+        document.getElementById("memoryDescription");
+
+    const memoryNumber =
+        document.getElementById("memoryNumber");
+
+    const counterCurrent =
+        document.getElementById("counterCurrent");
+
+    const progressDots =
+        document.querySelectorAll(".progress-dot");
+
+
+    /* =========================================================
+       UPDATE MEMORY CONTENT
+    ========================================================= */
+
+    function updateMemory() {
+
+        memoryTitle.style.opacity = "0";
+        memoryDescription.style.opacity = "0";
+        memoryNumber.style.opacity = "0";
+
+        setTimeout(() => {
+
+            const memory =
+                memories[currentMemory];
+
+            memoryTitle.textContent =
+                memory.title;
+
+            memoryDescription.innerHTML =
+                memory.description;
+
+            const number =
+                String(currentMemory + 1).padStart(2, "0");
+
+            memoryNumber.textContent =
+                `MEMORY ${number}`;
+
+            counterCurrent.textContent =
+                number;
+
+
+            progressDots.forEach(
+                (dot, index) => {
+
+                    dot.classList.toggle(
+                        "active",
+                        index === currentMemory
+                    );
+
+                }
+            );
+
+
+            memoryTitle.style.opacity = "1";
+            memoryDescription.style.opacity = "1";
+            memoryNumber.style.opacity = "1";
+
+        }, 250);
+
+    }
+
+
+    /* =========================================================
+       MEMORY TRANSITION
+    ========================================================= */
+
+    nextButton.addEventListener(
+        "click",
+        () => {
+
+            const activePhoto =
+                photos[currentMemory];
+
+            activePhoto.classList.add("exit");
+
+
+            setTimeout(() => {
+
+                activePhoto.classList.remove("exit");
+
+                /*
+                    Move current photo to the back
+                */
+
+                const first =
+                    photos[0];
+
+                first.parentNode.appendChild(first);
+
+                /*
+                    Re-read photos after DOM reorder
+                */
+
+                currentMemory =
+                    (currentMemory + 1) % memories.length;
+
+                updateMemory();
+
+                resetPhotoPositions();
+
+            }, 650);
+
+        }
+    );
+
+
+    /* =========================================================
+       RESET PHOTO STACK
+    ========================================================= */
+
+    function resetPhotoPositions() {
+
+        const deckPhotos =
+            document.querySelectorAll(
+                ".memory-photo"
+            );
+
+        deckPhotos.forEach(
+            (photo, index) => {
+
+                photo.classList.remove("exit");
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       KEYBOARD SUPPORT
+    ========================================================= */
+
+    document.addEventListener(
+        "keydown",
+        (event) => {
+
+            if (event.key === "ArrowRight") {
+
+                nextButton.click();
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       SCROLL REVEAL
+    ========================================================= */
+
+    const revealElements =
+        document.querySelectorAll(".reveal");
+
+
+    const revealObserver =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(
+                    (entry) => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                            revealObserver.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
+
+
+    revealElements.forEach(
+        (element) => {
+
+            revealObserver.observe(
+                element
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       INITIAL MEMORY
+    ========================================================= */
+
+    updateMemory();
+
+</script>
+
+</body>
+</html>
