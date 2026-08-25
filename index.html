@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>About Us | Microsoft Campus Club</title>
+<meta name="description" content="Learn about the history, activities, memories and people behind Microsoft Campus Club.">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#050d1a;color:#e6edf7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:radial-gradient(circle at 20% 20%,rgba(40,110,180,.06),transparent 30%),radial-gradient(circle at 80% 70%,rgba(30,90,150,.05),transparent 32%)}
+.page-grid{position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.012) 1px,transparent 1px);background-size:60px 60px;mask-image:linear-gradient(to bottom,#000,transparent 90%)}
+
+/* STATUS + HEADER */
+.status-line{height:30px;border-bottom:1px solid rgba(150,180,210,.11);display:flex;align-items:center;justify-content:center;color:#6f8ca9;font:10px monospace;letter-spacing:2px;text-transform:uppercase}
+.status-dot{width:6px;height:6px;background:#4aa3ff;border-radius:50%;margin-right:8px;box-shadow:0 0 8px rgba(74,163,255,.7)}
+header{height:74px;width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 7vw;border-bottom:1px solid rgba(150,180,210,.1);background:rgba(5,13,26,.86);backdrop-filter:blur(14px);position:sticky;top:0;z-index:100}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-logo{width:40px;height:40px;object-fit:contain;border-radius:6px}
+.brand-text{display:flex;flex-direction:column}
+.brand-name{font-size:19px;font-weight:700}
+.brand-subtitle{color:#7894b2;font-size:11px;letter-spacing:1.2px;margin-top:2px}
+.join-button{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;color:#dcecff;padding:9px 15px;border:1px solid rgba(110,170,225,.25);background:rgba(20,45,70,.25);transition:.3s}
+.join-button:hover{border-color:rgba(100,175,240,.65);background:rgba(25,65,100,.35)}
+.join-arrow{color:#68b4ff;transition:.3s}.join-button:hover .join-arrow{transform:translateX(4px)}
+.history-image{width:100%;display:flex;align-items:center;justify-content:center;}
+.history-image img{width:100%;max-width:620px;height:auto;display:block;object-fit:contain;border:1px solid rgba(115,165,210,.18);box-shadow:0 25px 70px rgba(0,0,0,.38);}
+.admin-login-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 15px;
+
+    border: 1px solid rgba(100, 180, 230, 0.22);
+
+    color: #8fc8e8;
+
+    background: rgba(8, 24, 39, 0.45);
+
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+
+    text-decoration: none;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease,
+        color .2s ease;
+}
+
+.admin-login-link:hover {
+    border-color: rgba(100, 190, 240, 0.55);
+
+    background: rgba(30, 75, 105, 0.35);
+
+    color: #d7f1ff;
+}
+
+@media (max-width: 700px) {
+
+    .admin-login-link {
+        padding: 8px 11px;
+        font-size: 8px;
+    }
+
+}
+    /* GLOBAL */
+section{width:100%;padding:92px 7vw;position:relative}
+.section-label{font:10px monospace;color:#579bd4;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:13px}
+.section-title{font-size:clamp(36px,5vw,64px);line-height:1;letter-spacing:-2.7px;font-weight:700;color:#eef6ff}
+.section-title span{color:#6386a7}
+.section-description{max-width:650px;margin-top:20px;color:#8fa8c2;line-height:1.7;font-size:14px}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:none}
+
+/* STORY */
+.story-section{min-height:auto;display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center}
+.date-marker{margin-top:35px;border-left:1px solid #3976a8;padding-left:18px}
+.date-marker .date{font:14px monospace;color:#64b2f5;letter-spacing:1.5px}
+.date-marker .date-caption{color:#5f7894;font-size:10px;margin-top:5px;text-transform:uppercase;letter-spacing:1.3px}
+.history-text{margin-top:25px;max-width:720px;color:#a7b8ca;line-height:1.75;font-size:14px}
+.history-text strong{color:#e4f1ff}
+
+/* ACTIVITIES */
+.what-we-do{margin-top:65px;padding-top:55px;border-top:1px solid rgba(130,160,190,.12)}
+.what-we-do .section-title{font-size:38px}
+.activities-grid{margin-top:30px;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(130,160,190,.12);border-left:1px solid rgba(130,160,190,.12)}
+.activity{min-height:135px;padding:22px;border-right:1px solid rgba(130,160,190,.12);border-bottom:1px solid rgba(130,160,190,.12);transition:.3s;position:relative}
+.activity:after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:#4b9ddd;transition:.3s}
+.activity:hover{background:rgba(35,76,110,.08)}.activity:hover:after{width:100%}
+.activity-number{font:9px monospace;color:#4f83ad}.activity h3{margin-top:16px;font-size:15px;color:#dce9f7}.activity p{margin-top:7px;color:#718ba5;line-height:1.5;font-size:11px}
+.games-link{display:inline-flex;align-items:center;gap:10px;margin-top:30px;color:#78baf0;font:11px monospace;letter-spacing:1px;border-bottom:1px solid rgba(90,160,220,.35);padding-bottom:7px;transition:.3s}.games-link:hover{gap:16px;color:#b9ddfa}
+
+/* MEMORIES */
+.memories-section{border-top:1px solid rgba(130,160,190,.1)}
+.memories-header{display:flex;justify-content:space-between;align-items:end}
+.memory-counter{font:11px monospace;color:#587895;letter-spacing:2px}
+.memory-stage{margin-top:55px;display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}
+.photo-deck{position:relative;width:100%;height:440px;perspective:1400px}
+.memory-photo{position:absolute;width:min(100%,540px);aspect-ratio:16/10;height:auto;left:50%;top:50%;object-fit:contain;padding:5px;background:#07111f;border:1px solid rgba(150,190,225,.22);box-shadow:0 25px 55px rgba(0,0,0,.4);transform-origin:center;transition:transform .75s cubic-bezier(.22,.8,.2,1),opacity .55s ease,filter .55s ease;pointer-events:none;will-change:transform,opacity}
+.memory-photo.position-1{transform:translate(-50%,-50%) translate(0,0) rotate(0) scale(1);opacity:1;filter:brightness(.96);z-index:4}
+.memory-photo.position-2{transform:translate(-50%,-50%) translate(15px,-10px) rotate(3deg) scale(.95);opacity:.6;filter:brightness(.68);z-index:3}
+.memory-photo.position-3{transform:translate(-50%,-50%) translate(-15px,-19px) rotate(-4deg) scale(.9);opacity:.38;filter:brightness(.55);z-index:2}
+.memory-photo.position-4{transform:translate(-50%,-50%) translate(20px,-27px) rotate(6deg) scale(.85);opacity:.22;filter:brightness(.45);z-index:1}
+.memory-photo.position-hidden {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.75);
+    z-index: 0;
+    pointer-events: none;
+}
+.memory-photo.leaving{transform:translate(-50%,-50%) translate(105%,-20px) rotate(9deg) scale(1.03);opacity:0;z-index:10}
+.memory-content{max-width:550px;min-height:300px;display:flex;flex-direction:column;justify-content:center}
+.memory-number{font:10px monospace;color:#579bd4;letter-spacing:2.5px;margin-bottom:18px;transition:opacity .2s}
+.memory-content h3{font-size:clamp(32px,4vw,50px);letter-spacing:-2px;line-height:1;color:#edf6ff;transition:opacity .2s}
+.memory-content p{margin-top:20px;color:#8da5bd;line-height:1.75;font-size:14px;transition:opacity .2s}
+.memory-controls{display:flex;align-items:center;gap:17px;margin-top:30px}
+.memory-next{width:50px;height:50px;border-radius:50%;border:1px solid rgba(100,165,215,.35);background:rgba(15,35,55,.4);color:#9bcaf0;cursor:pointer;font-size:20px;transition:.3s}.memory-next:hover{border-color:#69b3ef;background:rgba(40,90,130,.3);transform:translateX(4px)}
+.memory-progress{display:flex;gap:6px}.progress-dot{width:5px;height:5px;background:#304a61;border-radius:5px;transition:.3s}.progress-dot.active{width:22px;background:#5ca8df}
+
+/* PEOPLE */
+.people-section{border-top:1px solid rgba(130,160,190,.1)}
+.mentor-grid{margin-top:50px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.mentor-card{border:1px solid rgba(120,155,185,.15);background:rgba(10,23,38,.45);transition:.3s}.mentor-card:hover{border-color:rgba(90,165,220,.4);transform:translateY(-4px)}
+.mentor-image{width:100%;height:300px;object-fit:contain;object-position:center;display:block;background:#07111f;padding:8px;filter:grayscale(5%) brightness(.92);}
+.mentor-info{padding:18px}.mentor-role{color:#579bd4;font:9px monospace;letter-spacing:1.7px;text-transform:uppercase}.mentor-name{margin-top:9px;color:#dce9f6;font-size:12px;line-height:1.5}
+.student-leadership{margin-top:70px}.sub-heading{color:#6e8da9;font:10px monospace;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:20px}
+.leadership-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(130,160,190,.12);border-left:1px solid rgba(130,160,190,.12)}
+.leader{padding:22px;min-height:115px;border-right:1px solid rgba(130,160,190,.12);border-bottom:1px solid rgba(130,160,190,.12);transition:.3s}.leader:hover{background:rgba(35,75,110,.08)}
+.leader-role{font:9px monospace;color:#579bd4;letter-spacing:1.4px}.leader-name{margin-top:12px;color:#dfeaf5;font-size:13px;line-height:1.45}.leader-course{margin-top:4px;color:#617b96;font:10px monospace}
+.teams-grid{margin-top:45px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.team-box{border:1px solid rgba(120,155,185,.14);padding:24px;background:rgba(10,23,38,.35)}.team-title{color:#dfeefa;font-size:16px}.team-head{margin-top:14px;color:#8ca9c2;font-size:12px;line-height:1.6}.team-head strong{color:#64afe5}.team-members{margin-top:15px;display:flex;flex-direction:column;gap:8px}.team-member{padding-top:8px;border-top:1px solid rgba(130,160,190,.08);color:#829bb3;font-size:11px}
+.office-list-section{margin-top:65px}.office-list{border-top:1px solid rgba(130,160,190,.14);margin-top:20px}.office-row{display:grid;grid-template-columns:1fr 110px;padding:13px 8px;border-bottom:1px solid rgba(130,160,190,.1);transition:.25s}.office-row:hover{padding-left:16px;background:rgba(35,75,110,.07)}.office-name{color:#c8d9e8;font-size:12px}.office-year{color:#55718d;font:10px monospace;text-align:right}
+.people-empty{grid-column:1/-1;padding:28px;color:#607b96;font:11px monospace;text-align:center;border:1px solid rgba(130,160,190,.1)}
+.mentor-card .mentor-image{object-fit:contain}
+
+
+/* FOOTER */
+footer{border-top:1px solid rgba(150,180,210,.12);padding:58px 7vw 35px;background:#050d1a}
+.footer-main{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:60px}
+.footer-brand-top{display:flex;align-items:center;gap:11px}.footer-logo{width:45px;height:45px;object-fit:contain}.footer-brand-name{font-size:20px;font-weight:700}.footer-brand-subtitle{margin-top:3px;color:#7290ae;font-size:11px;letter-spacing:1.1px}.footer-description{max-width:480px;margin-top:20px;color:#a0b4c9;font-size:13px;line-height:1.7}.footer-column h4{color:#eef5fc;font-size:12px;margin-bottom:15px}.footer-column a{display:block;color:#c3d1df;font-size:13px;margin-bottom:11px;transition:.25s}.footer-column a:hover{color:#6bb4ed;transform:translateX(3px)}
+.footer-bottom{border-top:1px solid rgba(130,160,190,.12);margin-top:45px;padding-top:28px;display:flex;justify-content:space-between;gap:20px;color:#7090ad;font:10px monospace}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+.story-section{grid-template-columns:1fr;gap:35px}.ai-visual{min-height:500px}.activities-grid{grid-template-columns:repeat(2,1fr)}.memory-stage{grid-template-columns:1fr;gap:35px}.memory-content{max-width:100%}.mentor-grid{grid-template-columns:repeat(2,1fr)}.leadership-grid{grid-template-columns:repeat(2,1fr)}.footer-main{grid-template-columns:1fr 1fr}.footer-brand{grid-column:1/-1}
+}
+@media(max-width:700px){
+header{padding:0 5vw;height:68px}.brand-logo{width:36px;height:36px}.brand-name{font-size:17px}.brand-subtitle{font-size:9px}.join-button{padding:8px 10px;font-size:10px}
+section{padding:70px 5vw}.section-title{letter-spacing:-2px}.story-section{padding-top:65px}.ai-card{height:400px}.ai-orbit{width:330px;height:330px}.activities-grid{grid-template-columns:1fr}.what-we-do .section-title{font-size:34px}
+.memory-stage{margin-top:40px}.photo-deck{height:330px}.memory-photo{width:94%;max-width:480px}.memory-content h3{font-size:34px}.mentor-grid,.leadership-grid,.teams-grid{grid-template-columns:1fr}.mentor-image{height:360px}.footer-main{grid-template-columns:1fr;gap:35px}.footer-brand{grid-column:auto}.footer-bottom{flex-direction:column;gap:10px}.office-row{grid-template-columns:1fr 75px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+</head>
+
+<body>
+<div class="page-grid"></div>
+
+<div class="status-line"><span class="status-dot"></span>MCC DIGITAL PLATFORM :: ABOUT US</div>
+
+<header>
+<a href="https://microsoft-campus-club-webpage.vercel.app/" class="brand">
+<img src="mcc-logo.jpg" alt="Microsoft Campus Club Logo" class="brand-logo">
+<div class="brand-text"><div class="brand-name">MCC</div><div class="brand-subtitle">MICROSOFT CAMPUS CLUB</div></div>
+</a>
+<a href="https://microsoft-campus-club-webpage.vercel.app/" class="join-button">JOIN US <span class="join-arrow">→</span></a>
+</header>
+
+<!-- SECTION 1: HISTORY + WHAT WE DO -->
+<section class="story-section">
+<div class="story-content reveal">
+<div class="section-label">01 / OUR STORY</div>
+<h1 class="section-title">The story<br><span>behind MCC.</span></h1>
+
+<div class="date-marker">
+<div class="date">18 MARCH 2008</div>
+<div class="date-caption">Where the journey began</div>
+</div>
+
+<div class="history-text">
+The <strong>Microsoft Student Partners (MSP)</strong> program encouraged students who were passionate about technology, eager to share their knowledge, and ready to develop skills beyond their classroom learning.
+<br><br>
+As part of the Microsoft Student Partner Program, Microsoft Student Partners from individual colleges established and ran Microsoft Campus Clubs within their respective institutions.
+<br><br>
+The <strong>Microsoft Campus Club</strong> was started on <strong>18 March 2008</strong> to facilitate education and knowledge exchange among students interested in Microsoft technologies.
+<br><br>
+MCC provides a space where students can learn about technology, connect with peers, exchange ideas, and build a community around shared interests. Microsoft Campus Clubs are supported by Microsoft.
+</div>
+
+<div class="what-we-do">
+<div class="section-label">WHAT WE DO</div>
+<h2 class="section-title">Build. Explore.<br><span>Grow together.</span></h2>
+
+<div class="activities-grid">
+<div class="activity"><div class="activity-number">01</div><h3>Weekly Events</h3><p>Regular sessions that bring students together to learn, share and connect.</p></div>
+<div class="activity"><div class="activity-number">02</div><h3>Hackathons</h3><p>Turning ideas into prototypes, solutions and real experiences.</p></div>
+<div class="activity"><div class="activity-number">03</div><h3>Placement Prep</h3><p>Mock tests and preparation activities to help students become career ready.</p></div>
+<div class="activity"><div class="activity-number">04</div><h3>Weekly Quizzes</h3><p>Challenging technical knowledge through regular quizzes and competitions.</p></div>
+<div class="activity"><div class="activity-number">05</div><h3>Innovation</h3><p>Encouraging students to think differently and turn ideas into possibilities.</p></div>
+<div class="activity"><div class="activity-number">06</div><h3>Tech Games</h3><p>Making technology interactive, competitive and fun.</p></div>
+<div class="activity"><div class="activity-number">07</div><h3>Young Minds</h3><p>Building confidence, curiosity and leadership among future creators.</p></div>
+<div class="activity"><div class="activity-number">08</div><h3>Community</h3><p>Connecting students through technology, collaboration and shared experiences.</p></div>
+</div>
+
+<a href="https://technical-game-homepage.vercel.app/" id="technicalGamesLink" class="games-link">EXPLORE TECHNICAL GAMES <span>→</span></a>
+</div>
+</div>
+
+<div class="history-image reveal">
+    <img
+        src="mcc-collaboration.png"
+        alt="Microsoft Campus Club students collaborating and sharing ideas"
+    >
+</div>
+</section>
+
+<!-- SECTION 2: MEMORIES -->
+<section class="memories-section">
+<div class="memories-header reveal">
+<div>
+<div class="section-label">02 / MEMORIES</div>
+<h2 class="section-title">Moments that<br><span>stay with us.</span></h2>
+</div>
+<div class="memory-counter">
+    <span id="counterCurrent">01</span> /
+    <span id="counterTotal">00</span>
+</div>
+</div>
+
+<div class="memory-stage">
+<div class="photo-deck reveal" id="photoDeck"></div>
+
+<div class="memory-content reveal">
+<div class="memory-number" id="memoryNumber">MEMORY 01</div>
+<h3 id="memoryTitle">Innovation Meets Applied AI</h3>
+<p id="memoryDescription">MCC, in collaboration with the Computer Society of India, hosted an orientation session featuring a guest speaker who shared insights into innovation and the growing possibilities of Applied AI.<br><br>It brought students together to explore emerging technologies, exchange ideas and look beyond the boundaries of the classroom.</p>
+<div class="memory-controls">
+<button class="memory-next" id="nextMemory" aria-label="Next memory">→</button>
+<div class="memory-progress" id="memoryProgress"></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SECTION 3: PEOPLE -->
+<section class="people-section">
+<div class="reveal">
+<div class="section-label">03 / PEOPLE</div>
+<h2 class="section-title">The people<br><span>behind MCC.</span></h2>
+<p class="section-description">The mentors, leaders and student teams who contribute their time, ideas and energy to the MCC community.</p>
+</div>
+
+<div class="mentor-grid reveal" id="facultyGrid"></div>
+
+<div class="student-leadership reveal">
+<div class="sub-heading">Student Leadership</div>
+<div class="leadership-grid" id="leadershipGrid"></div>
+</div>
+
+<div class="teams-grid reveal" id="teamsGrid"></div>
+
+<div class="office-list-section reveal">
+<div class="sub-heading">Office Bearers</div>
+<div class="office-list" id="officeBearersList"></div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="footer-main">
+<div class="footer-brand">
+<div class="footer-brand-top"><img src="mcc-logo.jpg" alt="MCC Logo" class="footer-logo"><div><div class="footer-brand-name">MCC</div><div class="footer-brand-subtitle">MICROSOFT CAMPUS CLUB</div></div></div>
+<div class="footer-description">The official centralized digital platform for the Microsoft Campus Club community. Uniting students, technical initiatives, activities, and resources.</div>
+</div>
+<div class="footer-column"><h4>NAVIGATION</h4><a href="https://microsoft-campus-club-webpage.vercel.app/">Home</a><a href="https://microsoft-campus-club-webpage.vercel.app/students-corner">Students Corner</a><a href="https://microsoft-campus-club-webpage.vercel.app/announcements">Announcements</a></div>
+<div class="footer-column"><h4>ROLE PORTALS</h4><a href="https://microsoft-campus-club-webpage.vercel.app/office-bearer/login">Office Bearer Login</a><a href="https://microsoft-campus-club-webpage.vercel.app/admin/login">Admin Login</a></div>
+</div>
+<div class="footer-bottom"><span>© 2026 Microsoft Campus Club. All rights reserved.</span><span>MCC Digital Platform — Authentication Gateway</span></div>
+</footer>
+
+<script>
+/* =========================================
+   MCC ABOUT US — SUPABASE
+========================================= */
+const supabaseClient = window.supabaseClient || (window.supabase && typeof SUPABASE_URL !== "undefined" ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null);
+
+
+/* =========================================
+   MOMENTS
+========================================= */
+
+let memories = [];
+let currentMemory = 0;
+let isAnimating = false;
+let photos = [];
+let progressDots = [];
+
+const photoDeck = document.getElementById("photoDeck");
+const nextButton = document.getElementById("nextMemory");
+const memoryTitle = document.getElementById("memoryTitle");
+const memoryDescription = document.getElementById("memoryDescription");
+const memoryNumber = document.getElementById("memoryNumber");
+const counterCurrent = document.getElementById("counterCurrent");
+const counterTotal = document.getElementById("counterTotal");
+const memoryProgress = document.getElementById("memoryProgress");
+
+async function loadMoments() {
+    try {
+        const { data, error } = await supabaseClient
+            .from("moments")
+            .select("id,title,description,image_url,display_order,active")
+            .eq("active", true)
+            .order("display_order", { ascending: true });
+
+        if (error) throw error;
+
+        memories = data || [];
+
+        if (!memories.length) {
+            showEmptyMoments();
+            return;
+        }
+
+        buildMomentPhotos();
+        buildProgressDots();
+        updateCounter();
+        setPositions();
+        updateMemoryText();
+
+        nextButton.disabled = memories.length <= 1;
+    } catch (error) {
+        console.error("Unable to load MCC moments:", error);
+        showEmptyMoments();
+    }
+}
+
+function buildMomentPhotos() {
+    photoDeck.innerHTML = "";
+
+    memories.forEach((memory, index) => {
+        const image = document.createElement("img");
+
+        image.src = memory.image_url;
+        image.alt = memory.title || "MCC Moment";
+        image.className = "memory-photo";
+        image.loading = index === 0 ? "eager" : "lazy";
+
+        image.onerror = () => {
+            image.style.display = "none";
+        };
+
+        photoDeck.appendChild(image);
+    });
+
+    photos = [...photoDeck.querySelectorAll(".memory-photo")];
+}
+
+function buildProgressDots() {
+    memoryProgress.innerHTML = "";
+
+    memories.forEach((_, index) => {
+        const dot = document.createElement("span");
+
+        dot.className =
+            index === 0
+                ? "progress-dot active"
+                : "progress-dot";
+
+        memoryProgress.appendChild(dot);
+    });
+
+    progressDots =
+        [...memoryProgress.querySelectorAll(".progress-dot")];
+}
+
+function setPositions() {
+    if (!photos.length) return;
+
+    photos.forEach((photo, index) => {
+        const position =
+            (index - currentMemory + photos.length) %
+            photos.length + 1;
+
+        photo.classList.remove(
+            "position-1",
+            "position-2",
+            "position-3",
+            "position-4",
+            "position-hidden",
+            "leaving"
+        );
+
+        if (position <= 4) {
+            photo.classList.add(`position-${position}`);
+        } else {
+            photo.classList.add("position-hidden");
+        }
+    });
+}
+
+function updateMemoryText() {
+    if (!memories.length) return;
+
+    const memory = memories[currentMemory];
+
+    memoryTitle.style.opacity = "0";
+    memoryDescription.style.opacity = "0";
+    memoryNumber.style.opacity = "0";
+
+    setTimeout(() => {
+        memoryTitle.textContent = memory.title || "";
+        memoryDescription.textContent = memory.description || "";
+
+        const number =
+            String(currentMemory + 1).padStart(2, "0");
+
+        memoryNumber.textContent = `MEMORY ${number}`;
+        counterCurrent.textContent = number;
+
+        progressDots.forEach((dot, index) => {
+            dot.classList.toggle(
+                "active",
+                index === currentMemory
+            );
+        });
+
+        memoryTitle.style.opacity = "1";
+        memoryDescription.style.opacity = "1";
+        memoryNumber.style.opacity = "1";
+    }, 180);
+}
+
+function updateCounter() {
+    counterTotal.textContent =
+        String(memories.length).padStart(2, "0");
+}
+
+function nextMoment() {
+    if (isAnimating || memories.length <= 1) return;
+
+    isAnimating = true;
+
+    const leavingPhoto = photos[currentMemory];
+
+    if (leavingPhoto) {
+        leavingPhoto.classList.add("leaving");
+    }
+
+    setTimeout(() => {
+        currentMemory =
+            (currentMemory + 1) % memories.length;
+
+        setPositions();
+        updateMemoryText();
+        isAnimating = false;
+    }, 720);
+}
+
+nextButton.addEventListener("click", nextMoment);
+
+function showEmptyMoments() {
+    memories = [];
+    photos = [];
+    progressDots = [];
+
+    photoDeck.innerHTML = "";
+
+    memoryTitle.textContent = "More moments to come.";
+    memoryDescription.textContent =
+        "MCC memories will appear here as they are added.";
+    memoryNumber.textContent = "MEMORIES";
+
+    counterCurrent.textContent = "00";
+    counterTotal.textContent = "00";
+    memoryProgress.innerHTML = "";
+
+    nextButton.disabled = true;
+}
+
+loadMoments();
+
+
+/* =========================================
+   PEOPLE
+========================================= */
+
+const facultyGrid =
+    document.getElementById("facultyGrid");
+
+const leadershipGrid =
+    document.getElementById("leadershipGrid");
+
+const teamsGrid =
+    document.getElementById("teamsGrid");
+
+const officeBearersList =
+    document.getElementById("officeBearersList");
+
+
+async function loadPeople() {
+    try {
+        const { data, error } = await supabaseClient
+            .from("office_bearers")
+            .select(`
+                id,
+                name,
+                role,
+                category,
+                person_type,
+                department,
+                year,
+                designation,
+                photo_url,
+                display_order,
+                active
+            `)
+            .eq("active", true)
+            .order("display_order", {
+                ascending: true
+            });
+
+        if (error) throw error;
+
+        const people = data || [];
+
+        renderFaculty(
+            people.filter(
+                person =>
+                    person.category ===
+                    "Faculty & Administration"
+            )
+        );
+
+        renderLeadership(
+            people.filter(
+                person =>
+                    person.category ===
+                    "Leadership"
+            )
+        );
+
+        renderTeams(
+            people.filter(
+                person =>
+                    person.category === "Technical Team" ||
+                    person.category === "Event Team"
+            )
+        );
+
+        renderOfficeBearers(
+            people.filter(
+                person =>
+                    person.category ===
+                    "Office Bearers"
+            )
+        );
+
+    } catch (error) {
+        console.error(
+            "Unable to load MCC people:",
+            error
+        );
+
+        showPeopleError();
+    }
+}
+
+
+/* -----------------------------------------
+   FACULTY & ADMINISTRATION
+----------------------------------------- */
+
+function renderFaculty(people) {
+    facultyGrid.innerHTML = "";
+
+    if (!people.length) {
+        facultyGrid.innerHTML = `
+            <div class="people-empty">
+                Faculty information is currently unavailable.
+            </div>
+        `;
+        return;
+    }
+
+    people.forEach(person => {
+        const card = document.createElement("div");
+        card.className = "mentor-card";
+
+        const image = document.createElement("img");
+        image.className = "mentor-image";
+        image.src = person.photo_url || "";
+        image.alt = person.name || "MCC Faculty";
+
+        image.onerror = () => {
+            image.style.opacity = "0";
+        };
+
+        const info = document.createElement("div");
+        info.className = "mentor-info";
+
+        const role = document.createElement("div");
+        role.className = "mentor-role";
+        role.textContent = person.role || "";
+
+        const name = document.createElement("div");
+        name.className = "mentor-name";
+        name.textContent =
+            [person.name, person.designation || person.department]
+                .filter(Boolean)
+                .join(" — ");
+
+        info.appendChild(role);
+        info.appendChild(name);
+
+        card.appendChild(image);
+        card.appendChild(info);
+
+        facultyGrid.appendChild(card);
+    });
+}
+
+
+/* -----------------------------------------
+   STUDENT LEADERSHIP
+----------------------------------------- */
+
+function renderLeadership(people) {
+    leadershipGrid.innerHTML = "";
+
+    if (!people.length) {
+        leadershipGrid.innerHTML = `
+            <div class="people-empty">
+                Student leadership information is currently unavailable.
+            </div>
+        `;
+        return;
+    }
+
+    people.forEach(person => {
+        const card = document.createElement("div");
+        card.className = "leader";
+
+        const role = document.createElement("div");
+        role.className = "leader-role";
+        role.textContent = person.role || "";
+
+        const name = document.createElement("div");
+        name.className = "leader-name";
+        name.textContent = person.name || "";
+
+        const course = document.createElement("div");
+        course.className = "leader-course";
+
+        course.textContent =
+            [person.year, person.department]
+                .filter(Boolean)
+                .join(" ");
+
+        card.appendChild(role);
+        card.appendChild(name);
+
+        if (course.textContent) {
+            card.appendChild(course);
+        }
+
+        leadershipGrid.appendChild(card);
+    });
+}
+
+
+/* -----------------------------------------
+   TECHNICAL + EVENT TEAMS
+----------------------------------------- */
+
+function renderTeams(people) {
+    teamsGrid.innerHTML = "";
+
+    const technical =
+        people.filter(
+            person =>
+                person.category === "Technical Team"
+        );
+
+    const events =
+        people.filter(
+            person =>
+                person.category === "Event Team"
+        );
+
+    if (technical.length) {
+        teamsGrid.appendChild(
+            createTeamBox(
+                "Software Team",
+                technical
+            )
+        );
+    }
+
+    if (events.length) {
+        teamsGrid.appendChild(
+            createTeamBox(
+                "Event Team",
+                events
+            )
+        );
+    }
+
+    if (!technical.length && !events.length) {
+        teamsGrid.innerHTML = `
+            <div class="people-empty">
+                Team information is currently unavailable.
+            </div>
+        `;
+    }
+}
+
+function createTeamBox(title, people) {
+    const box = document.createElement("div");
+    box.className = "team-box";
+
+    const titleElement =
+        document.createElement("div");
+
+    titleElement.className = "team-title";
+    titleElement.textContent = title;
+
+    const head =
+        people.find(person =>
+            (person.role || "")
+                .toLowerCase()
+                .includes("head")
+        );
+
+    const headElement =
+        document.createElement("div");
+
+    headElement.className = "team-head";
+
+    if (head) {
+        headElement.innerHTML =
+            `<strong>Head:</strong> ${escapeHtml(head.name)} — ${escapeHtml(formatCourse(head))}`;
+    } else {
+        headElement.textContent =
+            "Team members";
+    }
+
+    const members =
+        document.createElement("div");
+
+    members.className = "team-members";
+
+    people
+        .filter(person => person !== head)
+        .forEach(person => {
+            const member =
+                document.createElement("div");
+
+            member.className = "team-member";
+
+            member.textContent =
+                `${person.name || ""} — ${formatCourse(person)}`;
+
+            members.appendChild(member);
+        });
+
+    box.appendChild(titleElement);
+    box.appendChild(headElement);
+    box.appendChild(members);
+
+    return box;
+}
+
+
+/* -----------------------------------------
+   OFFICE BEARERS
+----------------------------------------- */
+
+function renderOfficeBearers(people) {
+    officeBearersList.innerHTML = "";
+
+    if (!people.length) {
+        officeBearersList.innerHTML = `
+            <div class="people-empty">
+                Office bearers information is currently unavailable.
+            </div>
+        `;
+        return;
+    }
+
+    people.forEach(person => {
+        const row = document.createElement("div");
+        row.className = "office-row";
+
+        const name =
+            document.createElement("span");
+
+        name.className = "office-name";
+        name.textContent = person.name || "";
+
+        const course =
+            document.createElement("span");
+
+        course.className = "office-year";
+
+        course.textContent =
+            formatCourse(person);
+
+        row.appendChild(name);
+        row.appendChild(course);
+
+        officeBearersList.appendChild(row);
+    });
+}
+
+
+/* -----------------------------------------
+   HELPERS
+----------------------------------------- */
+
+function formatCourse(person) {
+    return [
+        person.year,
+        person.department
+    ]
+        .filter(Boolean)
+        .join(" ");
+}
+
+function escapeHtml(value) {
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function showPeopleError() {
+    facultyGrid.innerHTML = `
+        <div class="people-empty">
+            Unable to load faculty information.
+        </div>
+    `;
+
+    leadershipGrid.innerHTML = `
+        <div class="people-empty">
+            Unable to load leadership information.
+        </div>
+    `;
+
+    teamsGrid.innerHTML = `
+        <div class="people-empty">
+            Unable to load team information.
+        </div>
+    `;
+
+    officeBearersList.innerHTML = `
+        <div class="people-empty">
+            Unable to load office bearer information.
+        </div>
+    `;
+}
+
+loadPeople();
+
+/* =========================================
+   REALTIME SYNCHRONIZATION
+   Auto-updates whenever Admin Portal adds/edits
+========================================= */
+
+if (supabaseClient) {
+    try {
+        supabaseClient
+            .channel('mcc-about-live-sync')
+            .on(
+                'postgres_changes',
+                { event: '*', schema: 'public', table: 'office_bearers' },
+                () => {
+                    loadPeople();
+                }
+            )
+            .on(
+                'postgres_changes',
+                { event: '*', schema: 'public', table: 'moments' },
+                () => {
+                    loadMoments();
+                }
+            )
+            .subscribe();
+    } catch (realtimeErr) {
+        console.warn("Realtime sync unavailable:", realtimeErr);
+    }
+}
+
+
+document.addEventListener("keydown", event => {
+    if (event.key === "ArrowRight") {
+        nextMoment();
+    }
+});
+
+
+/* =========================================
+   SCROLL REVEAL
+========================================= */
+
+const observer =
+    new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        { threshold: 0.1 }
+    );
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(el => observer.observe(el));
+
+
+/* =========================================
+   TECHNICAL GAMES
+   Keep the existing external link.
+========================================= */
+
+const technicalGamesLink =
+    document.getElementById(
+        "technicalGamesLink"
+    );
+
+if (technicalGamesLink) {
+    technicalGamesLink.addEventListener(
+        "click",
+        event => {
+            event.stopPropagation();
+        }
+    );
+}
+</script>
+</body>
+</html>
