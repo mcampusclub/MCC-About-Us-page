@@ -279,10 +279,52 @@ MCC provides a space where students can learn about technology, connect with pee
 
 <script>
 /* =========================================
-   MCC ABOUT US — SUPABASE
+   SUPABASE REST & SDK HELPER
 ========================================= */
-const supabaseClient = window.supabaseClient || (window.supabase && typeof SUPABASE_URL !== "undefined" ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null);
 
+
+
+async function fetchSupabaseTable(table) {
+    // 1. Direct REST Fetch (Bulletproof in any browser)
+    try {
+        const url = `${window.SUPABASE_URL || "https://lfrqmhjlpytvmbncdzpb.supabase.co"}/rest/v1/${table}?select=*&order=display_order.asc`;
+        const key = window.SUPABASE_PUBLISHABLE_KEY || "sb_publishable_ZkmHM5ggMI172u5c1e-F2Q_0iyLtMGp";
+
+        const res = await fetch(url, {
+            headers: {
+                "apikey": key,
+                "Authorization": `Bearer ${key}`
+            }
+        });
+
+        if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data) && data.length > 0) {
+                return data.filter(item => item.active !== false);
+            }
+        }
+    } catch (fetchErr) {
+        console.warn(`Direct fetch for ${table} error:`, fetchErr);
+    }
+
+    // 2. SDK client fallback
+    if (window.supabaseClient) {
+        try {
+            const { data, error } = await window.supabaseClient
+                .from(table)
+                .select("*")
+                .order("display_order", { ascending: true });
+
+            if (!error && data && data.length > 0) {
+                return data.filter(item => item.active !== false);
+            }
+        } catch (sdkErr) {
+            console.warn(`SDK query for ${table} error:`, sdkErr);
+        }
+    }
+
+    return [];
+}
 
 /* =========================================
    MOMENTS
@@ -328,20 +370,7 @@ const defaultMoments = [
 
 async function loadMoments() {
     try {
-        let dbMoments = [];
-        if (supabaseClient) {
-            const { data, error } = await supabaseClient
-                .from("moments")
-                .select("*")
-                .order("display_order", { ascending: true });
-
-            if (error) {
-                console.warn("Supabase moments notice:", error.message);
-            } else if (data && data.length) {
-                dbMoments = data.filter(m => m.active !== false);
-            }
-        }
-
+        const dbMoments = await fetchSupabaseTable("moments");
         memories = dbMoments.length ? dbMoments : defaultMoments;
 
         buildMomentPhotos();
@@ -361,6 +390,7 @@ async function loadMoments() {
         updateMemoryText();
     }
 }
+
 
 function buildMomentPhotos() {
     photoDeck.innerHTML = "";
@@ -574,49 +604,38 @@ function getDisplayCategory(person) {
 
 const defaultPeople = [
     {
-        name: "Dr. B. Shadaksharappa",
-        role: "Patron / Principal",
-        photo_url: "principal.jpg",
+        name: "DR. S ARIVAZHAGAN, M.E., PH.D.",
+        role: "Patron",
+        designation: "PRINCIPAL",
+        photo_url: "https://lfrqmhjlpytvmbncdzpb.supabase.co/storage/v1/object/public/mcc_media/office-bearers/dr-s-arivazhagan-m-e-ph-d-principal-1787376049084.jpg",
         category: "Faculty & Administration"
     },
     {
-        name: "Dr. M. Sangeetha",
-        role: "President / HOD CSE",
-        photo_url: "HOD.jpg",
+        name: "DR. T REVATHI, M.E., PH.D.",
+        role: "President",
+        designation: "HEAD OF THE DEPARTMENT, IT",
+        photo_url: "https://lfrqmhjlpytvmbncdzpb.supabase.co/storage/v1/object/public/mcc_media/office-bearers/dr-t-revathi-m-e-ph-d-1787377385302.jpg",
         category: "Faculty & Administration"
     },
     {
-        name: "Dr. A. Abirami",
-        role: "Faculty In-charge / ASP CSE",
-        photo_url: "Abirami.jpg",
+        name: "DR. R VENITTA RAJ, M.E., PH.D.",
+        role: "Faculty Advisor",
+        designation: "ASSOCIATE PROFESSOR",
+        photo_url: "https://lfrqmhjlpytvmbncdzpb.supabase.co/storage/v1/object/public/mcc_media/office-bearers/dr-r-venitta-raj-m-e-ph-d-1787377439331.jpg",
         category: "Faculty & Administration"
     },
     {
-        name: "Prof. K. Venitta",
-        role: "Faculty In-charge / AP CSE",
-        photo_url: "Venitta.jpg",
+        name: "MRS. K ABIRAMI, M.E. (PHD)",
+        role: "Faculty Advisor",
+        designation: "ASSISTANT PROFESSOR",
+        photo_url: "https://lfrqmhjlpytvmbncdzpb.supabase.co/storage/v1/object/public/mcc_media/office-bearers/mrs-k-abirami-m-e-phd-1787377485949.jpg",
         category: "Faculty & Administration"
     }
 ];
 
 async function loadPeople() {
     try {
-        let dbPeople = [];
-        if (supabaseClient) {
-            const { data, error } = await supabaseClient
-                .from("office_bearers")
-                .select("*")
-                .order("display_order", {
-                    ascending: true
-                });
-
-            if (error) {
-                console.warn("Supabase loadPeople notice:", error.message);
-            } else if (data && data.length) {
-                dbPeople = data.filter(person => person.active !== false);
-            }
-        }
-
+        const dbPeople = await fetchSupabaseTable("office_bearers");
         const people = dbPeople.length ? dbPeople : defaultPeople;
 
         renderFaculty(
@@ -683,7 +702,7 @@ function renderFaculty(people) {
         image.alt = person.name || "MCC Faculty";
 
         image.onerror = () => {
-            image.style.opacity = "0";
+            image.style.display = "none";
         };
 
         const info = document.createElement("div");
@@ -691,14 +710,11 @@ function renderFaculty(people) {
 
         const role = document.createElement("div");
         role.className = "mentor-role";
-        role.textContent = person.role || "";
+        role.textContent = [person.role, person.designation].filter(Boolean).join(" / ") || "FACULTY";
 
         const name = document.createElement("div");
         name.className = "mentor-name";
-        name.textContent =
-            [person.name, person.designation || person.department]
-                .filter(Boolean)
-                .join(" — ");
+        name.textContent = person.name || "";
 
         info.appendChild(role);
         info.appendChild(name);
@@ -709,6 +725,7 @@ function renderFaculty(people) {
         facultyGrid.appendChild(card);
     });
 }
+
 
 
 /* -----------------------------------------
