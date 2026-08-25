@@ -29,46 +29,36 @@ header{height:74px;width:100%;display:flex;align-items:center;justify-content:sp
 .join-arrow{color:#68b4ff;transition:.3s}.join-button:hover .join-arrow{transform:translateX(4px)}
 .history-image{width:100%;display:flex;align-items:center;justify-content:center;}
 .history-image img{width:100%;max-width:620px;height:auto;display:block;object-fit:contain;border:1px solid rgba(115,165,210,.18);box-shadow:0 25px 70px rgba(0,0,0,.38);}
+.header-actions{display:flex;align-items:center;gap:12px}
 .admin-login-link {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
-    padding: 10px 15px;
-
-    border: 1px solid rgba(100, 180, 230, 0.22);
-
+    padding: 9px 14px;
+    border: 1px solid rgba(100, 180, 230, 0.25);
     color: #8fc8e8;
-
     background: rgba(8, 24, 39, 0.45);
-
     font-family: monospace;
-    font-size: 9px;
+    font-size: 11px;
     letter-spacing: 1px;
-
     text-decoration: none;
-
-    transition:
-        border-color .2s ease,
-        background .2s ease,
-        color .2s ease;
+    transition: border-color .2s ease, background .2s ease, color .2s ease;
 }
 
 .admin-login-link:hover {
-    border-color: rgba(100, 190, 240, 0.55);
-
-    background: rgba(30, 75, 105, 0.35);
-
+    border-color: rgba(100, 190, 240, 0.65);
+    background: rgba(30, 75, 105, 0.45);
     color: #d7f1ff;
 }
 
 @media (max-width: 700px) {
-
-    .admin-login-link {
-        padding: 8px 11px;
-        font-size: 8px;
+    .header-actions {
+        gap: 6px;
     }
-
+    .admin-login-link {
+        padding: 8px 10px;
+        font-size: 9px;
+    }
 }
     /* GLOBAL */
 section{width:100%;padding:92px 7vw;position:relative}
@@ -169,11 +159,14 @@ section{padding:70px 5vw}.section-title{letter-spacing:-2px}.story-section{paddi
 <img src="mcc-logo.jpg" alt="Microsoft Campus Club Logo" class="brand-logo">
 <div class="brand-text"><div class="brand-name">MCC</div><div class="brand-subtitle">MICROSOFT CAMPUS CLUB</div></div>
 </a>
+<div class="header-actions">
+<a href="https://mcc-about-us-admin.vercel.app/" class="admin-login-link" target="_blank" rel="noopener noreferrer">ADMIN PORTAL ↗</a>
 <a href="https://microsoft-campus-club-webpage.vercel.app/" class="join-button">JOIN US <span class="join-arrow">→</span></a>
+</div>
 </header>
 
 <!-- SECTION 1: HISTORY + WHAT WE DO -->
-<section class="story-section">
+<section class="story-section" id="story">
 <div class="story-content reveal">
 <div class="section-label">01 / OUR STORY</div>
 <h1 class="section-title">The story<br><span>behind MCC.</span></h1>
@@ -221,7 +214,7 @@ MCC provides a space where students can learn about technology, connect with pee
 </section>
 
 <!-- SECTION 2: MEMORIES -->
-<section class="memories-section">
+<section class="memories-section" id="moments">
 <div class="memories-header reveal">
 <div>
 <div class="section-label">02 / MEMORIES</div>
@@ -249,7 +242,7 @@ MCC provides a space where students can learn about technology, connect with pee
 </section>
 
 <!-- SECTION 3: PEOPLE -->
-<section class="people-section">
+<section class="people-section" id="people">
 <div class="reveal">
 <div class="section-label">03 / PEOPLE</div>
 <h2 class="section-title">The people<br><span>behind MCC.</span></h2>
@@ -258,14 +251,14 @@ MCC provides a space where students can learn about technology, connect with pee
 
 <div class="mentor-grid reveal" id="facultyGrid"></div>
 
-<div class="student-leadership reveal">
+<div class="student-leadership reveal" id="leadership">
 <div class="sub-heading">Student Leadership</div>
 <div class="leadership-grid" id="leadershipGrid"></div>
 </div>
 
-<div class="teams-grid reveal" id="teamsGrid"></div>
+<div class="teams-grid reveal" id="teams"></div>
 
-<div class="office-list-section reveal">
+<div class="office-list-section reveal" id="office-bearers">
 <div class="sub-heading">Office Bearers</div>
 <div class="office-list" id="officeBearersList"></div>
 </div>
@@ -279,7 +272,7 @@ MCC provides a space where students can learn about technology, connect with pee
 <div class="footer-description">The official centralized digital platform for the Microsoft Campus Club community. Uniting students, technical initiatives, activities, and resources.</div>
 </div>
 <div class="footer-column"><h4>NAVIGATION</h4><a href="https://microsoft-campus-club-webpage.vercel.app/">Home</a><a href="https://microsoft-campus-club-webpage.vercel.app/students-corner">Students Corner</a><a href="https://microsoft-campus-club-webpage.vercel.app/announcements">Announcements</a></div>
-<div class="footer-column"><h4>ROLE PORTALS</h4><a href="https://microsoft-campus-club-webpage.vercel.app/office-bearer/login">Office Bearer Login</a><a href="https://microsoft-campus-club-webpage.vercel.app/admin/login">Admin Login</a></div>
+<div class="footer-column"><h4>ROLE PORTALS</h4><a href="https://microsoft-campus-club-webpage.vercel.app/office-bearer/login">Office Bearer Login</a><a href="https://mcc-about-us-admin.vercel.app/" target="_blank" rel="noopener noreferrer">About Us Admin Login</a></div>
 </div>
 <div class="footer-bottom"><span>© 2026 Microsoft Campus Club. All rights reserved.</span><span>MCC Digital Platform — Authentication Gateway</span></div>
 </footer>
