@@ -307,13 +307,15 @@ async function loadMoments() {
     try {
         const { data, error } = await supabaseClient
             .from("moments")
-            .select("id,title,description,image_url,display_order,active")
-            .eq("active", true)
+            .select("*")
             .order("display_order", { ascending: true });
 
-        if (error) throw error;
+        if (error) {
+            console.error("Supabase loadMoments error:", error);
+            throw error;
+        }
 
-        memories = data || [];
+        memories = (data || []).filter(m => m.active !== false);
 
         if (!memories.length) {
             showEmptyMoments();
@@ -496,61 +498,92 @@ const officeBearersList =
     document.getElementById("officeBearersList");
 
 
+function getDisplayCategory(person) {
+    const role = (person.role || "").toLowerCase();
+    const category = person.category || "";
+
+    if (
+        category === "Faculty" ||
+        category === "Faculty & Administration" ||
+        role.includes("patron") ||
+        role.includes("president") ||
+        role.includes("faculty advisor") ||
+        role.includes("faculty incharge") ||
+        role.includes("faculty in-charge")
+    ) {
+        return "Faculty & Administration";
+    }
+
+    if (
+        category === "Team" ||
+        category === "Technical Team" ||
+        role.includes("software") ||
+        role.includes("technical")
+    ) {
+        return "Technical Team";
+    }
+
+    if (
+        category === "Event Team" ||
+        role.includes("event coordinator") ||
+        role.includes("event co-ordinator")
+    ) {
+        return "Event Team";
+    }
+
+    if (
+        category === "Leadership" ||
+        role.includes("chairperson") ||
+        role.includes("co chairperson") ||
+        role.includes("co-chairperson") ||
+        role.includes("secretary") ||
+        role.includes("joint secretary")
+    ) {
+        return "Leadership";
+    }
+
+    return "Office Bearers";
+}
+
 async function loadPeople() {
     try {
         const { data, error } = await supabaseClient
             .from("office_bearers")
-            .select(`
-                id,
-                name,
-                role,
-                category,
-                person_type,
-                department,
-                year,
-                designation,
-                photo_url,
-                display_order,
-                active
-            `)
-            .eq("active", true)
+            .select("*")
             .order("display_order", {
                 ascending: true
             });
 
-        if (error) throw error;
+        if (error) {
+            console.error("Supabase loadPeople error:", error);
+            throw error;
+        }
 
-        const people = data || [];
+        const people = (data || []).filter(person => person.active !== false);
 
         renderFaculty(
             people.filter(
-                person =>
-                    person.category ===
-                    "Faculty & Administration"
+                person => getDisplayCategory(person) === "Faculty & Administration"
             )
         );
 
         renderLeadership(
             people.filter(
-                person =>
-                    person.category ===
-                    "Leadership"
+                person => getDisplayCategory(person) === "Leadership"
             )
         );
 
         renderTeams(
             people.filter(
                 person =>
-                    person.category === "Technical Team" ||
-                    person.category === "Event Team"
+                    getDisplayCategory(person) === "Technical Team" ||
+                    getDisplayCategory(person) === "Event Team"
             )
         );
 
         renderOfficeBearers(
             people.filter(
-                person =>
-                    person.category ===
-                    "Office Bearers"
+                person => getDisplayCategory(person) === "Office Bearers"
             )
         );
 
@@ -563,6 +596,7 @@ async function loadPeople() {
         showPeopleError();
     }
 }
+
 
 
 /* -----------------------------------------
@@ -818,7 +852,7 @@ function renderOfficeBearers(people) {
 
 function formatCourse(person) {
     return [
-        person.year,
+        person.year || person.year_of_study,
         person.department
     ]
         .filter(Boolean)
