@@ -256,7 +256,7 @@ MCC provides a space where students can learn about technology, connect with pee
 <div class="leadership-grid" id="leadershipGrid"></div>
 </div>
 
-<div class="teams-grid reveal" id="teams"></div>
+<div class="teams-grid reveal" id="teamsGrid"></div>
 
 <div class="office-list-section reveal" id="office-bearers">
 <div class="sub-heading">Office Bearers</div>
@@ -549,7 +549,8 @@ const leadershipGrid =
     document.getElementById("leadershipGrid");
 
 const teamsGrid =
-    document.getElementById("teamsGrid");
+    document.getElementById("teamsGrid") ||
+    document.getElementById("teams");
 
 const officeBearersList =
     document.getElementById("officeBearersList");
@@ -572,8 +573,8 @@ function getDisplayCategory(person) {
     }
 
     if (
-        category === "Team" ||
         category === "Technical Team" ||
+        category === "Team" ||
         role.includes("software") ||
         role.includes("technical")
     ) {
@@ -582,8 +583,7 @@ function getDisplayCategory(person) {
 
     if (
         category === "Event Team" ||
-        role.includes("event coordinator") ||
-        role.includes("event co-ordinator")
+        role.includes("event")
     ) {
         return "Event Team";
     }
@@ -591,16 +591,15 @@ function getDisplayCategory(person) {
     if (
         category === "Leadership" ||
         role.includes("chairperson") ||
-        role.includes("co chairperson") ||
-        role.includes("co-chairperson") ||
         role.includes("secretary") ||
-        role.includes("joint secretary")
+        role.includes("treasurer")
     ) {
         return "Leadership";
     }
 
     return "Office Bearers";
 }
+
 
 const defaultPeople = [
     {
@@ -781,18 +780,19 @@ function renderLeadership(people) {
 ----------------------------------------- */
 
 function renderTeams(people) {
+    if (!teamsGrid) return;
     teamsGrid.innerHTML = "";
 
     const technical =
         people.filter(
             person =>
-                person.category === "Technical Team"
+                getDisplayCategory(person) === "Technical Team"
         );
 
     const events =
         people.filter(
             person =>
-                person.category === "Event Team"
+                getDisplayCategory(person) === "Event Team"
         );
 
     if (technical.length) {
@@ -821,6 +821,7 @@ function renderTeams(people) {
         `;
     }
 }
+
 
 function createTeamBox(title, people) {
     const box = document.createElement("div");
@@ -884,7 +885,9 @@ function createTeamBox(title, people) {
 ----------------------------------------- */
 
 function renderOfficeBearers(people) {
+    if (!officeBearersList) return;
     officeBearersList.innerHTML = "";
+
 
     if (!people.length) {
         officeBearersList.innerHTML = `
