@@ -303,24 +303,46 @@ const counterCurrent = document.getElementById("counterCurrent");
 const counterTotal = document.getElementById("counterTotal");
 const memoryProgress = document.getElementById("memoryProgress");
 
+const defaultMoments = [
+    {
+        title: "Innovation Meets Applied AI",
+        description: "MCC, in collaboration with the Computer Society of India, hosted an orientation session featuring a guest speaker who shared insights into innovation and the growing possibilities of Applied AI.\n\nIt brought students together to explore emerging technologies, exchange ideas and look beyond the boundaries of the classroom.",
+        image_url: "memory1.jpg"
+    },
+    {
+        title: "Building Community Through Code",
+        description: "Students coming together for hands-on technical workshops, exploring cloud systems, building projects, and developing practical skills beyond academics.",
+        image_url: "memory2.jpg"
+    },
+    {
+        title: "Tech Sparks & Hackathons",
+        description: "Exciting hackathons and prototype sprints where students collaborated to solve real-world problems using Microsoft technologies.",
+        image_url: "memory3.jpg"
+    },
+    {
+        title: "Mentorship & Growth",
+        description: "Senior leaders and alumni sharing industry experiences, interview preparation tips, and career guidance for aspiring engineers.",
+        image_url: "memory4.jpg"
+    }
+];
+
 async function loadMoments() {
     try {
-        const { data, error } = await supabaseClient
-            .from("moments")
-            .select("*")
-            .order("display_order", { ascending: true });
+        let dbMoments = [];
+        if (supabaseClient) {
+            const { data, error } = await supabaseClient
+                .from("moments")
+                .select("*")
+                .order("display_order", { ascending: true });
 
-        if (error) {
-            console.error("Supabase loadMoments error:", error);
-            throw error;
+            if (error) {
+                console.warn("Supabase moments notice:", error.message);
+            } else if (data && data.length) {
+                dbMoments = data.filter(m => m.active !== false);
+            }
         }
 
-        memories = (data || []).filter(m => m.active !== false);
-
-        if (!memories.length) {
-            showEmptyMoments();
-            return;
-        }
+        memories = dbMoments.length ? dbMoments : defaultMoments;
 
         buildMomentPhotos();
         buildProgressDots();
@@ -331,7 +353,12 @@ async function loadMoments() {
         nextButton.disabled = memories.length <= 1;
     } catch (error) {
         console.error("Unable to load MCC moments:", error);
-        showEmptyMoments();
+        memories = defaultMoments;
+        buildMomentPhotos();
+        buildProgressDots();
+        updateCounter();
+        setPositions();
+        updateMemoryText();
     }
 }
 
@@ -545,21 +572,52 @@ function getDisplayCategory(person) {
     return "Office Bearers";
 }
 
+const defaultPeople = [
+    {
+        name: "Dr. B. Shadaksharappa",
+        role: "Patron / Principal",
+        photo_url: "principal.jpg",
+        category: "Faculty & Administration"
+    },
+    {
+        name: "Dr. M. Sangeetha",
+        role: "President / HOD CSE",
+        photo_url: "HOD.jpg",
+        category: "Faculty & Administration"
+    },
+    {
+        name: "Dr. A. Abirami",
+        role: "Faculty In-charge / ASP CSE",
+        photo_url: "Abirami.jpg",
+        category: "Faculty & Administration"
+    },
+    {
+        name: "Prof. K. Venitta",
+        role: "Faculty In-charge / AP CSE",
+        photo_url: "Venitta.jpg",
+        category: "Faculty & Administration"
+    }
+];
+
 async function loadPeople() {
     try {
-        const { data, error } = await supabaseClient
-            .from("office_bearers")
-            .select("*")
-            .order("display_order", {
-                ascending: true
-            });
+        let dbPeople = [];
+        if (supabaseClient) {
+            const { data, error } = await supabaseClient
+                .from("office_bearers")
+                .select("*")
+                .order("display_order", {
+                    ascending: true
+                });
 
-        if (error) {
-            console.error("Supabase loadPeople error:", error);
-            throw error;
+            if (error) {
+                console.warn("Supabase loadPeople notice:", error.message);
+            } else if (data && data.length) {
+                dbPeople = data.filter(person => person.active !== false);
+            }
         }
 
-        const people = (data || []).filter(person => person.active !== false);
+        const people = dbPeople.length ? dbPeople : defaultPeople;
 
         renderFaculty(
             people.filter(
@@ -593,7 +651,7 @@ async function loadPeople() {
             error
         );
 
-        showPeopleError();
+        renderFaculty(defaultPeople);
     }
 }
 
