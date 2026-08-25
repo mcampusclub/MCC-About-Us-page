@@ -193,14 +193,16 @@ MCC provides a space where students can learn about technology, connect with pee
 <div class="photo-deck reveal" id="photoDeck"></div>
 
 <div class="memory-content reveal">
-<h3 id="memoryTitle">Innovation Meets Applied AI</h3>
-<p id="memoryDescription">MCC, in collaboration with the Computer Society of India, hosted an orientation session featuring a guest speaker who shared insights into innovation and the growing possibilities of Applied AI.<br><br>It brought students together to explore emerging technologies, exchange ideas and look beyond the boundaries of the classroom.</p>
+<h3 id="memoryTitle"></h3>
+<p id="memoryDescription"></p>
+
 <div class="memory-controls">
 <button class="memory-next" id="nextMemory" aria-label="Next memory">→</button>
 <div class="memory-progress" id="memoryProgress"></div>
 </div>
 </div>
 </div>
+
 </section>
 
 <!-- SECTION 3: PEOPLE -->
@@ -301,38 +303,19 @@ const photoDeck = document.getElementById("photoDeck");
 const nextButton = document.getElementById("nextMemory");
 const memoryTitle = document.getElementById("memoryTitle");
 const memoryDescription = document.getElementById("memoryDescription");
-const memoryNumber = document.getElementById("memoryNumber");
 const counterCurrent = document.getElementById("counterCurrent");
 const counterTotal = document.getElementById("counterTotal");
 const memoryProgress = document.getElementById("memoryProgress");
 
-const defaultMoments = [
-    {
-        title: "Innovation Meets Applied AI",
-        description: "MCC, in collaboration with the Computer Society of India, hosted an orientation session featuring a guest speaker who shared insights into innovation and the growing possibilities of Applied AI.\n\nIt brought students together to explore emerging technologies, exchange ideas and look beyond the boundaries of the classroom.",
-        image_url: "memory1.jpg"
-    },
-    {
-        title: "Building Community Through Code",
-        description: "Students coming together for hands-on technical workshops, exploring cloud systems, building projects, and developing practical skills beyond academics.",
-        image_url: "memory2.jpg"
-    },
-    {
-        title: "Tech Sparks & Hackathons",
-        description: "Exciting hackathons and prototype sprints where students collaborated to solve real-world problems using Microsoft technologies.",
-        image_url: "memory3.jpg"
-    },
-    {
-        title: "Mentorship & Growth",
-        description: "Senior leaders and alumni sharing industry experiences, interview preparation tips, and career guidance for aspiring engineers.",
-        image_url: "memory4.jpg"
-    }
-];
-
 async function loadMoments() {
     try {
         const dbMoments = await fetchSupabaseTable("moments");
-        memories = dbMoments.length ? dbMoments : defaultMoments;
+        memories = (dbMoments || []).filter(m => m.active !== false);
+
+        if (!memories.length) {
+            showEmptyMoments();
+            return;
+        }
 
         buildMomentPhotos();
         buildProgressDots();
@@ -343,12 +326,7 @@ async function loadMoments() {
         nextButton.disabled = memories.length <= 1;
     } catch (error) {
         console.error("Unable to load MCC moments:", error);
-        memories = defaultMoments;
-        buildMomentPhotos();
-        buildProgressDots();
-        updateCounter();
-        setPositions();
-        updateMemoryText();
+        showEmptyMoments();
     }
 }
 
@@ -424,7 +402,6 @@ function updateMemoryText() {
 
     memoryTitle.style.opacity = "0";
     memoryDescription.style.opacity = "0";
-    memoryNumber.style.opacity = "0";
 
     setTimeout(() => {
         memoryTitle.textContent = memory.title || "";
@@ -432,8 +409,6 @@ function updateMemoryText() {
 
         const number =
             String(currentMemory + 1).padStart(2, "0");
-
-        memoryNumber.textContent = `MEMORY ${number}`;
         counterCurrent.textContent = number;
 
         progressDots.forEach((dot, index) => {
@@ -445,7 +420,6 @@ function updateMemoryText() {
 
         memoryTitle.style.opacity = "1";
         memoryDescription.style.opacity = "1";
-        memoryNumber.style.opacity = "1";
     }, 180);
 }
 
@@ -484,10 +458,8 @@ function showEmptyMoments() {
 
     photoDeck.innerHTML = "";
 
-    memoryTitle.textContent = "More moments to come.";
-    memoryDescription.textContent =
-        "MCC memories will appear here as they are added.";
-    memoryNumber.textContent = "MEMORIES";
+    memoryTitle.textContent = "";
+    memoryDescription.textContent = "";
 
     counterCurrent.textContent = "00";
     counterTotal.textContent = "00";
@@ -495,6 +467,7 @@ function showEmptyMoments() {
 
     nextButton.disabled = true;
 }
+
 
 loadMoments();
 
